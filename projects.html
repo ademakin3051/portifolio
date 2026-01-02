@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos | Natanael Lima - Red Team Specialist</title>
+    <meta name="description" content="Projetos de Cybersecurity, RPA e Automação desenvolvidos por Natanael Lima">
+    <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-black': '#0a0a0f',
+                        'cyber-dark': '#12121a',
+                        'cyber-green': '#00ff41',
+                        'cyber-cyan': '#00d4ff',
+                        'cyber-red': '#ff0040',
+                        'cyber-purple': '#8b00ff',
+                        'cyber-gray': '#1a1a2e',
+                    },
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
+                        'cyber': ['Orbitron', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'JetBrains Mono', monospace; background: #0a0a0f; color: #e0e0e0; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #00ff41; border-radius: 3px; }
+
+        .matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.03; }
+        .scanlines::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); pointer-events: none; z-index: 1000; }
+        .grid-pattern { background-image: linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px); background-size: 50px 50px; }
+
+        .glow-green { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 40px #00ff41; }
+
+        .cyber-card {
+            background: linear-gradient(145deg, #12121a 0%, #0a0a0f 100%);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        .cyber-card:hover::before { left: 100%; }
+        .cyber-card:hover {
+            border-color: #00ff41;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 255, 65, 0.2);
+        }
+
+        .project-card-featured {
+            background: linear-gradient(145deg, #12121a 0%, #0a0a0f 100%);
+            border: 2px solid rgba(0, 255, 65, 0.3);
+            transition: all 0.4s ease;
+        }
+        .project-card-featured:hover {
+            border-color: #00ff41;
+            transform: scale(1.02);
+            box-shadow: 0 0 60px rgba(0, 255, 65, 0.3);
+        }
+
+        .nav-link { position: relative; transition: color 0.3s ease; }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00ff41; transition: width 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        .terminal { background: rgba(10, 10, 15, 0.95); border: 1px solid #00ff41; border-radius: 8px; }
+        .terminal-header { background: linear-gradient(90deg, #1a1a2e, #12121a); padding: 10px 15px; border-bottom: 1px solid rgba(0, 255, 65, 0.3); display: flex; align-items: center; gap: 8px; }
+        .terminal-btn { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .tech-tag {
+            padding: 4px 12px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: #00ff41;
+            transition: all 0.3s ease;
+        }
+        .tech-tag:hover {
+            background: rgba(0, 255, 65, 0.2);
+            transform: scale(1.05);
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .status-complete { background: rgba(0, 255, 65, 0.2); color: #00ff41; border: 1px solid #00ff41; }
+        .status-progress { background: rgba(0, 212, 255, 0.2); color: #00d4ff; border: 1px solid #00d4ff; }
+        .status-planned { background: rgba(139, 0, 255, 0.2); color: #8b00ff; border: 1px solid #8b00ff; }
+
+        @media (max-width: 768px) {
+            .scanlines::before { display: none; }
+        }
+    </style>
+</head>
+<body class="scanlines grid-pattern">
+    <canvas id="matrix" class="matrix-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cyber-black/90 backdrop-blur-md border-b border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="font-cyber text-cyber-green text-lg sm:text-xl tracking-wider glow-green">
+                    <span class="text-cyber-cyan">&lt;</span>NL<span class="text-cyber-cyan">/&gt;</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="index.html" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Home</a>
+                    <a href="index.html#about" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Sobre</a>
+                    <a href="index.html#skills" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Skills</a>
+                    <a href="projects.html" class="nav-link text-cyber-green text-sm tracking-wide active">Projetos</a>
+                    <a href="blog.html" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Blog</a>
+                    <a href="index.html#contact" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Contato</a>
+                </div>
+
+                <button id="menuBtn" class="md:hidden text-cyber-green p-2">
+                    <ion-icon name="menu-outline" class="text-2xl"></ion-icon>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-cyber-dark border-t border-cyber-green/20">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Home</a>
+                <a href="index.html#about" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Sobre</a>
+                <a href="projects.html" class="block text-cyber-green text-sm py-2">Projetos</a>
+                <a href="blog.html" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Blog</a>
+                <a href="index.html#contact" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 sm:pt-32 sm:pb-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center reveal">
+                <h1 class="font-cyber text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4">
+                    <span class="text-cyber-green">//</span> PROJETOS
+                </h1>
+                <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto mb-6">
+                    Soluções desenvolvidas com foco em <span class="text-cyber-green">segurança</span>, 
+                    <span class="text-cyber-cyan">automação</span> e <span class="text-cyber-purple">inovação</span>
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mx-auto"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="py-12 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Project 1: Featured -->
+            <div class="project-card-featured rounded-2xl overflow-hidden mb-12 reveal">
+                <div class="grid lg:grid-cols-2">
+                    <div class="relative h-64 lg:h-auto overflow-hidden">
+                        <img src="./img/projeto1.png" alt="Chatbot GLPI" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyber-black via-cyber-black/80 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-cyber-black/50 lg:to-cyber-black"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="status-badge status-complete">Completo</span>
+                        </div>
+                    </div>
+                    <div class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-cyber-cyan/20 rounded-lg flex items-center justify-center">
+                                <ion-icon name="chatbubbles-outline" class="text-cyber-cyan text-xl"></ion-icon>
+                            </div>
+                            <span class="text-cyber-cyan text-xs uppercase tracking-widest">RPA + AI</span>
+                        </div>
+                        
+                        <h2 class="font-cyber text-xl sm:text-2xl lg:text-3xl text-white mb-4">Chatbot GLPI</h2>
+                        
+                        <p class="text-gray-400 text-sm sm:text-base mb-6 leading-relaxed">
+                            Chatbot de suporte inteligente integrando <span class="text-cyber-green">N8N</span>, 
+                            <span class="text-cyber-cyan">GLPI</span>, <span class="text-cyber-purple">OpenAI GPT-4.1</span> e 
+                            <span class="text-white">WhatsApp API</span>. Automatiza abertura e acompanhamento de chamados 
+                            com resumos gerados por IA, oferecendo atendimento 24/7.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="tech-tag">N8N</span>
+                            <span class="tech-tag" style="color: #00d4ff; border-color: rgba(0, 212, 255, 0.3);">GLPI</span>
+                            <span class="tech-tag" style="color: #8b00ff; border-color: rgba(139, 0, 255, 0.3);">OpenAI</span>
+                            <span class="tech-tag" style="color: #25D366; border-color: rgba(37, 211, 102, 0.3);">WhatsApp</span>
+                            <span class="tech-tag" style="color: #ff0040; border-color: rgba(255, 0, 64, 0.3);">Webhooks</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://github.com/ademakin3051/botglpi" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-cyber-green text-cyber-black font-bold rounded transition-all hover:bg-cyber-green/90 hover:scale-105 text-sm">
+                                <ion-icon name="logo-github"></ion-icon>
+                                Ver Código
+                            </a>
+                            <a href="https://youtu.be/EqQT7VZ-78E" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 border border-cyber-cyan text-cyber-cyan font-bold rounded transition-all hover:bg-cyber-cyan/10 hover:scale-105 text-sm">
+                                <ion-icon name="play-circle-outline"></ion-icon>
+                                Ver Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Featured -->
+            <div class="project-card-featured rounded-2xl overflow-hidden mb-12 reveal">
+                <div class="grid lg:grid-cols-2">
+                    <div class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center order-2 lg:order-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-cyber-green/20 rounded-lg flex items-center justify-center">
+                                <ion-icon name="create-outline" class="text-cyber-green text-xl"></ion-icon>
+                            </div>
+                            <span class="text-cyber-green text-xs uppercase tracking-widest">Automação</span>
+                        </div>
+                        
+                        <h2 class="font-cyber text-xl sm:text-2xl lg:text-3xl text-white mb-4">Digitador Automático</h2>
+                        
+                        <p class="text-gray-400 text-sm sm:text-base mb-6 leading-relaxed">
+                            Aplicação <span class="text-cyber-green">Python</span> com interface Tkinter para 
+                            automatização de digitação. Controla o teclado via <span class="text-cyber-cyan">pynput</span>, 
+                            permitindo ajustar velocidade e interromper a qualquer momento. 
+                            Ideal para automação de tarefas repetitivas.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag" style="color: #00d4ff; border-color: rgba(0, 212, 255, 0.3);">Tkinter</span>
+                            <span class="tech-tag" style="color: #8b00ff; border-color: rgba(139, 0, 255, 0.3);">Pynput</span>
+                            <span class="tech-tag" style="color: #ff0040; border-color: rgba(255, 0, 64, 0.3);">GUI</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://github.com/ademakin3051/digitador-automatico" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-cyber-green text-cyber-black font-bold rounded transition-all hover:bg-cyber-green/90 hover:scale-105 text-sm">
+                                <ion-icon name="logo-github"></ion-icon>
+                                Ver Código
+                            </a>
+                            <a href="https://youtu.be/trLHH-mYcH4" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 border border-cyber-cyan text-cyber-cyan font-bold rounded transition-all hover:bg-cyber-cyan/10 hover:scale-105 text-sm">
+                                <ion-icon name="play-circle-outline"></ion-icon>
+                                Ver Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative h-64 lg:h-auto overflow-hidden order-1 lg:order-2">
+                        <img src="./img/projeto2.png" alt="Digitador Automático" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-l from-cyber-black via-cyber-black/80 to-transparent lg:bg-gradient-to-l lg:from-transparent lg:via-cyber-black/50 lg:to-cyber-black"></div>
+                        <div class="absolute top-4 right-4">
+                            <span class="status-badge status-complete">Completo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Upcoming Projects -->
+    <section class="py-12 bg-cyber-dark/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal mb-8">
+                <h2 class="font-cyber text-xl sm:text-2xl text-white mb-2 flex items-center gap-3">
+                    <ion-icon name="rocket-outline" class="text-cyber-cyan"></ion-icon>
+                    Próximos Projetos
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-cyber-cyan to-cyber-purple"></div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                <!-- Upcoming 1 -->
+                <div class="cyber-card p-6 rounded-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-cyber-red/20 rounded-lg flex items-center justify-center">
+                            <ion-icon name="bug-outline" class="text-cyber-red text-2xl"></ion-icon>
+                        </div>
+                        <span class="status-badge status-progress">Em Dev</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Google Dorks</h3>
+                    <p class="text-gray-500 text-sm mb-4">Script automatizado para identificação de dominios e subdominios anexados no google com api</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs text-cyber-red">Python</span>
+                        <span class="text-xs text-gray-500">•</span>
+                        <span class="text-xs text-cyber-cyan">OWASP</span>
+                        <span class="text-xs text-gray-500">•</span>
+                        <span class="text-xs text-cyber-green">API</span>
+                    </div>
+                </div>
+
+                <!-- Upcoming 2 -->
+                <div class="cyber-card p-6 rounded-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-cyber-purple/20 rounded-lg flex items-center justify-center">
+                            <ion-icon name="wifi-outline" class="text-cyber-purple text-2xl"></ion-icon>
+                        </div>
+                        <span class="status-badge status-planned">Planejado</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Network Monitor</h3>
+                    <p class="text-gray-500 text-sm mb-4">Dashboard em tempo real para monitoramento de tráfego e anomalias de rede com ajuda em tempo real de I.A</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs text-cyber-purple">Python</span>
+                        <span class="text-xs text-gray-500">•</span>
+                        <span class="text-xs text-cyber-cyan">Scapy</span>
+                        <span class="text-xs text-gray-500">•</span>
+                        <span class="text-xs text-cyber-green">Dashboard</span>
+                    </div>
+                </div>
+
+                <!-- Upcoming 3 -->
+                <div class="cyber-card p-6 rounded-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-cyber-cyan/20 rounded-lg flex items-center justify-center">
+                            <ion-icon name="fish-outline" class="text-cyber-cyan text-2xl"></ion-icon>
+                        </div>
+                        <span class="status-badge status-planned">Planejado</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Phishing Detector</h3>
+                    <p class="text-gray-500 text-sm mb-4">Ferramenta de análise e detecção de sites de phishing com machine learning</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs text-cyber-cyan">Python</span>
+                        <span class="text-xs text-gray-500">•</span>
+                        <span class="text-xs text-cyber-red">ML</span>
+                        <span class="text-xs text-gray-500">•</span>
+                        <span class="text-xs text-cyber-green">Browser Ext</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terminal Section -->
+    <section class="py-12 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="terminal reveal">
+                <div class="terminal-header">
+                    <span class="terminal-btn bg-cyber-red"></span>
+                    <span class="terminal-btn bg-yellow-500"></span>
+                    <span class="terminal-btn bg-cyber-green"></span>
+                    <span class="text-gray-500 text-xs ml-2">~/projects/stats.sh</span>
+                </div>
+                <div class="p-6">
+                    <p class="text-cyber-green mb-4">$ cat project_stats.json</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                        <div>
+                            <p class="font-cyber text-2xl sm:text-3xl text-cyber-green">2</p>
+                            <p class="text-gray-500 text-xs">Completos</p>
+                        </div>
+                        <div>
+                            <p class="font-cyber text-2xl sm:text-3xl text-cyber-cyan">1</p>
+                            <p class="text-gray-500 text-xs">Em Desenvolvimento</p>
+                        </div>
+                        <div>
+                            <p class="font-cyber text-2xl sm:text-3xl text-cyber-purple">2</p>
+                            <p class="text-gray-500 text-xs">Planejados</p>
+                        </div>
+                        <div>
+                            <p class="font-cyber text-2xl sm:text-3xl text-cyber-red">100%</p>
+                            <p class="text-gray-500 text-xs">Open Source</p>
+                        </div>
+                    </div>
+                    <p class="text-cyber-green mt-6 animate-pulse">$ _</p>
+                </div>
+            </div>
+
+            <!-- GitHub CTA -->
+            <div class="text-center mt-10 reveal">
+                <p class="text-gray-400 mb-4 text-sm">Todos os projetos estão disponíveis no GitHub</p>
+                <a href="https://github.com/ademakin3051" target="_blank" class="inline-flex items-center gap-2 px-8 py-3 bg-cyber-green text-cyber-black font-bold rounded transition-all hover:bg-cyber-green/90 hover:scale-105">
+                    <ion-icon name="logo-github" class="text-xl"></ion-icon>
+                    Ver Todos no GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-gray-500 text-sm">
+                    <span class="text-cyber-green">&lt;</span>2025<span class="text-cyber-green">/&gt;</span> Natanael Lima • Red Team Specialist
+                </p>
+                <div class="flex items-center gap-4">
+                    <a href="https://github.com/ademakin3051" target="_blank" class="text-gray-500 hover:text-white transition-colors">
+                        <ion-icon name="logo-github" class="text-xl"></ion-icon>
+                    </a>
+                    <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" class="text-gray-500 hover:text-cyber-cyan transition-colors">
+                        <ion-icon name="logo-linkedin" class="text-xl"></ion-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        document.getElementById('menuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Matrix Rain
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 14;
+        let columns = canvas.width / fontSize;
+        let drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px JetBrains Mono';
+            for (let i = 0; i < drops.length; i++) {
+                ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = canvas.width / fontSize;
+            drops = Array(Math.floor(columns)).fill(1);
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        function reveal() {
+            revealElements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        reveal();
+    </script>
+</body>
+</html>

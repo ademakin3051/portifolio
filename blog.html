@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Natanael Lima - Cybersecurity Insights</title>
+    <meta name="description" content="Artigos sobre Cybersecurity, Ethical Hacking, Social Engineering e proteção digital">
+    <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-black': '#0a0a0f',
+                        'cyber-dark': '#12121a',
+                        'cyber-green': '#00ff41',
+                        'cyber-cyan': '#00d4ff',
+                        'cyber-red': '#ff0040',
+                        'cyber-purple': '#8b00ff',
+                        'cyber-gray': '#1a1a2e',
+                    },
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
+                        'cyber': ['Orbitron', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'JetBrains Mono', monospace; background: #0a0a0f; color: #e0e0e0; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #00ff41; border-radius: 3px; }
+
+        .matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.03; }
+        .scanlines::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); pointer-events: none; z-index: 1000; }
+        .grid-pattern { background-image: linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px); background-size: 50px 50px; }
+
+        .glow-green { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 40px #00ff41; }
+
+        .blog-card {
+            background: linear-gradient(145deg, #12121a 0%, #0a0a0f 100%);
+            border: 1px solid rgba(0, 255, 65, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, #00ff41, #00d4ff);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .blog-card:hover::before { transform: scaleX(1); }
+        .blog-card:hover {
+            border-color: rgba(0, 255, 65, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 255, 65, 0.15);
+        }
+        .blog-card:hover .blog-img { transform: scale(1.1); }
+
+        .blog-img {
+            transition: transform 0.5s ease;
+        }
+
+        .featured-card {
+            background: linear-gradient(145deg, #12121a 0%, #0a0a0f 100%);
+            border: 2px solid rgba(255, 0, 64, 0.3);
+        }
+        .featured-card:hover {
+            border-color: #ff0040;
+            box-shadow: 0 0 60px rgba(255, 0, 64, 0.2);
+        }
+
+        .category-tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .cat-security { background: rgba(255, 0, 64, 0.2); color: #ff0040; }
+        .cat-social { background: rgba(139, 0, 255, 0.2); color: #8b00ff; }
+        .cat-news { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
+        .cat-tutorial { background: rgba(0, 255, 65, 0.2); color: #00ff41; }
+
+        .nav-link { position: relative; transition: color 0.3s ease; }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00ff41; transition: width 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .scanlines::before { display: none; }
+        }
+    </style>
+</head>
+<body class="scanlines grid-pattern">
+    <canvas id="matrix" class="matrix-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cyber-black/90 backdrop-blur-md border-b border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="font-cyber text-cyber-green text-lg sm:text-xl tracking-wider glow-green">
+                    <span class="text-cyber-cyan">&lt;</span>NL<span class="text-cyber-cyan">/&gt;</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="index.html" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Home</a>
+                    <a href="index.html#about" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Sobre</a>
+                    <a href="index.html#skills" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Skills</a>
+                    <a href="projects.html" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Projetos</a>
+                    <a href="blog.html" class="nav-link text-cyber-green text-sm tracking-wide active">Blog</a>
+                    <a href="index.html#contact" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Contato</a>
+                </div>
+
+                <button id="menuBtn" class="md:hidden text-cyber-green p-2">
+                    <ion-icon name="menu-outline" class="text-2xl"></ion-icon>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-cyber-dark border-t border-cyber-green/20">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Home</a>
+                <a href="index.html#about" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Sobre</a>
+                <a href="projects.html" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Projetos</a>
+                <a href="blog.html" class="block text-cyber-green text-sm py-2">Blog</a>
+                <a href="index.html#contact" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 sm:pt-32 sm:pb-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center reveal">
+                <h1 class="font-cyber text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4">
+                    <span class="text-cyber-green">//</span> BLOG
+                </h1>
+                <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto mb-6">
+                    Insights sobre <span class="text-cyber-red">Cybersecurity</span>, 
+                    <span class="text-cyber-purple">Social Engineering</span> e 
+                    <span class="text-cyber-cyan">Proteção Digital</span>
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mx-auto"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="py-8 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal mb-6">
+                <h2 class="text-cyber-red font-mono text-sm flex items-center gap-2">
+                    <ion-icon name="flame-outline"></ion-icon>
+                    DESTAQUE
+                </h2>
+            </div>
+
+            <a href="https://sunrise-otter-ad6.notion.site/Japan-Uncovers-Chinese-Hacker-Behind-Extensive-Cyberattacks-1788e85494cf805ea7b1fefbeea08098" target="_blank" class="block featured-card rounded-2xl overflow-hidden reveal group">
+                <div class="grid lg:grid-cols-2">
+                    <div class="relative h-64 lg:h-80 overflow-hidden">
+                        <img src="./img/blogdestaque.png" alt="Japan Uncovers Chinese Hacker" class="w-full h-full object-cover blog-img">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-cyber-black/60 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="category-tag cat-news">Cyber News</span>
+                        </div>
+                    </div>
+                    <div class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+                        <div class="flex items-center gap-3 text-gray-500 text-xs mb-4">
+                            <span class="flex items-center gap-1">
+                                <ion-icon name="calendar-outline"></ion-icon>
+                                11 Jan, 2025
+                            </span>
+                            <span>•</span>
+                            <span class="flex items-center gap-1">
+                                <ion-icon name="time-outline"></ion-icon>
+                                5 min read
+                            </span>
+                        </div>
+                        
+                        <h2 class="font-bold text-xl sm:text-2xl lg:text-3xl text-white mb-4 group-hover:text-cyber-red transition-colors">
+                            Japan Uncovers Chinese Hacker Behind Extensive Cyberattacks
+                        </h2>
+                        
+                        <p class="text-gray-400 text-sm sm:text-base mb-6 leading-relaxed">
+                            Japão alerta sobre ataques cibernéticos contínuos do grupo MirrorFace da China. 
+                            Entenda as táticas utilizadas e como organizações podem se proteger dessas ameaças avançadas.
+                        </p>
+
+                        <div class="flex items-center gap-2 text-cyber-red group-hover:gap-4 transition-all">
+                            <span class="font-bold text-sm">Ler artigo completo</span>
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-12 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal mb-8">
+                <h2 class="font-cyber text-xl sm:text-2xl text-white mb-2 flex items-center gap-3">
+                    <ion-icon name="newspaper-outline" class="text-cyber-green"></ion-icon>
+                    Todos os Artigos
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan"></div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Post 1 -->
+                <a href="https://sunrise-otter-ad6.notion.site/O-Perigo-da-Engenharia-Social-Principais-Ataques-e-Como-se-Proteger-209272682c174545b7cbecba58704435" target="_blank" class="blog-card rounded-xl overflow-hidden reveal group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="./img/blog1.png" alt="Engenharia Social" class="w-full h-full object-cover blog-img">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-transparent to-transparent"></div>
+                        <div class="absolute top-3 left-3">
+                            <span class="category-tag cat-social">Social Engineering</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-3 text-gray-500 text-xs mb-3">
+                            <span>21 Jun, 2023</span>
+                            <span>•</span>
+                            <span>4 min</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base mb-2 group-hover:text-cyber-purple transition-colors line-clamp-2">
+                            O Perigo da Engenharia Social: Principais Ataques e Como se Proteger
+                        </h3>
+                        <p class="text-gray-500 text-sm line-clamp-2">
+                            Aprenda a identificar e se proteger dos ataques de engenharia social mais comuns
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Post 2 -->
+                <a href="https://sunrise-otter-ad6.notion.site/Explorando-o-Mundo-do-Crime-com-a-Sociedade-An-nima-S-A-33af64221fa24ba098093c9b0989f64a" target="_blank" class="blog-card rounded-xl overflow-hidden reveal group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="./img/blog2.png" alt="Mundo do Crime Digital" class="w-full h-full object-cover blog-img">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-transparent to-transparent"></div>
+                        <div class="absolute top-3 left-3">
+                            <span class="category-tag cat-security">Security Research</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-3 text-gray-500 text-xs mb-3">
+                            <span>11 Oct, 2023</span>
+                            <span>•</span>
+                            <span>8 min</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base mb-2 group-hover:text-cyber-red transition-colors line-clamp-2">
+                            Explorando o Mundo do Crime Digital
+                        </h3>
+                        <p class="text-gray-500 text-sm line-clamp-2">
+                            Uma análise profunda do submundo cibernético e como se proteger
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Post 3 -->
+                <a href="https://sunrise-otter-ad6.notion.site/Cuidado-Criminosos-est-o-Usando-Seus-Dados-para-Golpes-fb3d132105e44bdda56c3c06cd7e94cc" target="_blank" class="blog-card rounded-xl overflow-hidden reveal group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="./img/blog3.png" alt="Dados vazados" class="w-full h-full object-cover blog-img">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-transparent to-transparent"></div>
+                        <div class="absolute top-3 left-3">
+                            <span class="category-tag cat-security">Data Breach</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-3 text-gray-500 text-xs mb-3">
+                            <span>23 Feb, 2024</span>
+                            <span>•</span>
+                            <span>6 min</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base mb-2 group-hover:text-cyber-red transition-colors line-clamp-2">
+                            Cuidado! Criminosos Estão Usando Seus Dados para Golpes
+                        </h3>
+                        <p class="text-gray-500 text-sm line-clamp-2">
+                            Bases de dados vazadas revelam mais do que você imagina
+                        </p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter / CTA Section -->
+    <section class="py-16 bg-cyber-dark/50 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <div class="w-16 h-16 bg-cyber-green/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <ion-icon name="shield-checkmark-outline" class="text-cyber-green text-3xl"></ion-icon>
+            </div>
+            
+            <h2 class="font-cyber text-xl sm:text-2xl md:text-3xl text-white mb-4">
+                Mantenha-se <span class="text-cyber-green">Protegido</span>
+            </h2>
+            
+            <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto mb-8">
+                Conhecimento é a melhor defesa. Acompanhe meus artigos e fique por dentro das 
+                últimas ameaças e técnicas de proteção digital.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" class="w-full sm:w-auto px-8 py-3 bg-cyber-green text-cyber-black font-bold rounded transition-all hover:bg-cyber-green/90 hover:scale-105 flex items-center justify-center gap-2">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                    Seguir no LinkedIn
+                </a>
+                <a href="index.html#contact" class="w-full sm:w-auto px-8 py-3 border border-cyber-cyan text-cyber-cyan font-bold rounded transition-all hover:bg-cyber-cyan/10 hover:scale-105 flex items-center justify-center gap-2">
+                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                    Entrar em Contato
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topics Section -->
+    <section class="py-12 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal mb-8">
+                <h2 class="font-cyber text-xl sm:text-2xl text-white mb-2 flex items-center gap-3">
+                    <ion-icon name="pricetags-outline" class="text-cyber-cyan"></ion-icon>
+                    Tópicos
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-cyber-cyan to-cyber-purple"></div>
+            </div>
+
+            <div class="flex flex-wrap gap-3 reveal">
+                <span class="px-4 py-2 bg-cyber-gray border border-cyber-red/30 rounded-full text-sm text-cyber-red hover:bg-cyber-red/10 transition-colors cursor-pointer">
+                    #CyberSecurity
+                </span>
+                <span class="px-4 py-2 bg-cyber-gray border border-cyber-purple/30 rounded-full text-sm text-cyber-purple hover:bg-cyber-purple/10 transition-colors cursor-pointer">
+                    #SocialEngineering
+                </span>
+                <span class="px-4 py-2 bg-cyber-gray border border-cyber-cyan/30 rounded-full text-sm text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors cursor-pointer">
+                    #DataBreach
+                </span>
+                <span class="px-4 py-2 bg-cyber-gray border border-cyber-green/30 rounded-full text-sm text-cyber-green hover:bg-cyber-green/10 transition-colors cursor-pointer">
+                    #EthicalHacking
+                </span>
+                <span class="px-4 py-2 bg-cyber-gray border border-white/30 rounded-full text-sm text-white hover:bg-white/10 transition-colors cursor-pointer">
+                    #RedTeam
+                </span>
+                <span class="px-4 py-2 bg-cyber-gray border border-yellow-500/30 rounded-full text-sm text-yellow-500 hover:bg-yellow-500/10 transition-colors cursor-pointer">
+                    #OSINT
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-gray-500 text-sm">
+                    <span class="text-cyber-green">&lt;</span>2025<span class="text-cyber-green">/&gt;</span> Natanael Lima • Red Team Specialist
+                </p>
+                <div class="flex items-center gap-4">
+                    <a href="https://github.com/ademakin3051" target="_blank" class="text-gray-500 hover:text-white transition-colors">
+                        <ion-icon name="logo-github" class="text-xl"></ion-icon>
+                    </a>
+                    <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" class="text-gray-500 hover:text-cyber-cyan transition-colors">
+                        <ion-icon name="logo-linkedin" class="text-xl"></ion-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        document.getElementById('menuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Matrix Rain
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 14;
+        let columns = canvas.width / fontSize;
+        let drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px JetBrains Mono';
+            for (let i = 0; i < drops.length; i++) {
+                ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = canvas.width / fontSize;
+            drops = Array(Math.floor(columns)).fill(1);
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        function reveal() {
+            revealElements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        reveal();
+    </script>
+</body>
+</html>

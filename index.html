@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portifolio Natanael</title>
+    <meta name="description" content="Especialista em Cybersecurity, Red Team, Penetration Testing e Automação de Processos. Transformando segurança em vantagem competitiva.">
+    <meta name="keywords" content="cybersecurity, red team, penetration testing, ethical hacker, RPA, automation">
+    <meta name="author" content="Natanael Lima">
+    
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Natanael Lima | Red Team Specialist">
+    <meta property="og:description" content="Especialista em Cybersecurity, Red Team e Penetration Testing">
+    <meta property="og:image" content="./img/my-avatar.png">
+    
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-black': '#0a0a0f',
+                        'cyber-dark': '#12121a',
+                        'cyber-green': '#00ff41',
+                        'cyber-green-dim': '#00cc33',
+                        'cyber-cyan': '#00d4ff',
+                        'cyber-red': '#ff0040',
+                        'cyber-purple': '#8b00ff',
+                        'cyber-gray': '#1a1a2e',
+                        'cyber-yellow':'#FFD700'
+                    },
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
+                        'cyber': ['Orbitron', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #00ff41; border-radius: 3px; }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+        }
+
+        .scanlines::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .glitch { position: relative; }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+        .glitch::before { animation: glitch-1 0.4s infinite linear alternate-reverse; color: #00ff41; z-index: -1; }
+        .glitch::after { animation: glitch-2 0.4s infinite linear alternate-reverse; color: #ff0040; z-index: -2; }
+
+        @keyframes glitch-1 {
+            0%, 100% { clip-path: inset(0 0 95% 0); transform: translateX(-2px); }
+            20% { clip-path: inset(30% 0 60% 0); transform: translateX(2px); }
+            40% { clip-path: inset(50% 0 30% 0); transform: translateX(-2px); }
+            60% { clip-path: inset(70% 0 20% 0); transform: translateX(2px); }
+            80% { clip-path: inset(10% 0 80% 0); transform: translateX(-2px); }
+        }
+        @keyframes glitch-2 {
+            0%, 100% { clip-path: inset(95% 0 0 0); transform: translateX(2px); }
+            20% { clip-path: inset(60% 0 30% 0); transform: translateX(-2px); }
+            40% { clip-path: inset(30% 0 50% 0); transform: translateX(2px); }
+            60% { clip-path: inset(20% 0 70% 0); transform: translateX(-2px); }
+            80% { clip-path: inset(80% 0 10% 0); transform: translateX(2px); }
+        }
+
+        .glow-green { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 40px #00ff41; }
+        .box-glow { box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.05); }
+
+        .cyber-card {
+            background: linear-gradient(145deg, #12121a 0%, #0a0a0f 100%);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        .cyber-card:hover::before { left: 100%; }
+        .cyber-card:hover {
+            border-color: #00ff41;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
+        }
+
+        .terminal {
+            background: rgba(10, 10, 15, 0.95);
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+        }
+        .terminal-header {
+            background: linear-gradient(90deg, #1a1a2e, #12121a);
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .terminal-btn { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+        .skill-bar {
+            height: 6px;
+            background: rgba(0, 255, 65, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff41, #00d4ff);
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        .nav-link { position: relative; transition: color 0.3s ease; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: #00ff41;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        @keyframes pulseGreen {
+            0%, 100% { opacity: 1; box-shadow: 0 0 20px rgba(0, 255, 65, 0.5); }
+            50% { opacity: 0.8; box-shadow: 0 0 40px rgba(0, 255, 65, 0.8); }
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .grid-pattern {
+            background-image: linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        @media (max-width: 768px) {
+            .glitch::before, .glitch::after { display: none; }
+            .scanlines::before { display: none; }
+        }
+
+        /* Testimonial Card Fix */
+        .testimonial-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .testimonial-text {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-style: italic;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body class="scanlines grid-pattern">
+    <canvas id="matrix" class="matrix-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cyber-black/90 backdrop-blur-md border-b border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#hero" class="font-cyber text-cyber-green text-lg sm:text-xl tracking-wider glow-green">
+                    <span class="text-cyber-cyan">&lt;</span>NL<span class="text-cyber-cyan">/&gt;</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="#about" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Sobre</a>
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Skills</a>
+                    <a href="#experience" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Experiência</a>
+                    <a href="projects.html" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Projetos</a>
+                    <a href="blog.html" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Blog</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Contato</a>
+                </div>
+
+                <button id="menuBtn" class="md:hidden text-cyber-green p-2">
+                    <ion-icon name="menu-outline" class="text-2xl"></ion-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-cyber-dark border-t border-cyber-green/20">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#about" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Sobre</a>
+                <a href="#skills" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Skills</a>
+                <a href="#experience" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Experiência</a>
+                <a href="projects.html" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Projetos</a>
+                <a href="blog.html" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Blog</a>
+                <a href="#contact" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-16">
+        <div class="absolute inset-0 bg-gradient-to-b from-cyber-black via-cyber-dark to-cyber-black opacity-90"></div>
+        
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-1/4 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-cyber-green/5 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-cyber-cyan/5 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <!-- Avatar -->
+            <div class="mb-6 sm:mb-8 relative inline-block">
+                <div class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-2 border-cyber-green p-1 box-glow mx-auto" style="animation: pulseGreen 3s ease-in-out infinite;">
+                    <img src="./img/my-avatar.png" alt="Natanael Lima - Red Team Specialist" class="w-full h-full rounded-full object-contain">
+                </div>
+                <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-cyber-green text-cyber-black px-3 py-1 text-xs font-bold rounded-full whitespace-nowrap">
+                    DISPONÍVEL
+                </div>
+            </div>
+
+            <!-- Name -->
+            <h1 class="font-cyber text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 glitch" data-text="NATANAEL LIMA">
+                NATANAEL LIMA
+            </h1>
+
+            <!-- Typing Effect -->
+            <div class="h-6 sm:h-8 md:h-10 mb-6 sm:mb-8 overflow-hidden">
+                <p class="font-mono text-cyber-green text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider">
+                    <span class="text-cyber-cyan">&gt;</span> <span id="typingText"></span><span class="animate-pulse">_</span>
+                </p>
+            </div>
+
+            <!-- Professional Tagline -->
+            <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
+                <span class="text-cyber-yellow" >Identifico brechas críticas e ajudo a construir antes que se tornem ameaças reais.</span> 
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                <a href="#contact" class="w-full sm:w-auto px-8 py-3 bg-cyber-green text-cyber-black font-bold rounded transition-all hover:bg-cyber-green/90 hover:scale-105 flex items-center justify-center gap-2">
+                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                    Vamos Conversar
+                </a>
+                <a href="https://drive.google.com/file/d/1lg2fYg4_A2yYg5QsX-86DCXbS38xX-Ok/view" target="_blank" class="w-full sm:w-auto px-8 py-3 border border-cyber-green text-cyber-green font-bold rounded transition-all hover:bg-cyber-green/10 hover:scale-105 flex items-center justify-center gap-2">
+                    <ion-icon name="document-text-outline"></ion-icon>
+                    Currículo
+                </a>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-4 mt-10 sm:mt-12 max-w-md mx-auto">
+                <div class="cyber-card p-3 sm:p-4 rounded-lg text-center">
+                    <p class="font-cyber text-xl sm:text-2xl text-cyber-green">4+</p>
+                    <p class="text-gray-500 text-xs mt-1">Anos de Experiência</p>
+                </div>
+                <div class="cyber-card p-3 sm:p-4 rounded-lg text-center">
+                    <p class="font-cyber text-xl sm:text-2xl text-cyber-cyan">10+</p>
+                    <p class="text-gray-500 text-xs mt-1">Projetos Entregues</p>
+                </div>
+                <div class="cyber-card p-3 sm:p-4 rounded-lg text-center">
+                    <p class="font-cyber text-xl sm:text-2xl text-cyber-red">16+</p>
+                    <p class="text-gray-500 text-xs mt-1">Certificados</p>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block">
+                <a href="#about" class="text-cyber-green">
+                    <ion-icon name="chevron-down-outline" class="text-3xl"></ion-icon>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 sm:py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal">
+                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center gap-4">
+                    <span class="text-cyber-green">//</span> SOBRE MIM
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-8 sm:mb-12"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                <!-- Bio -->
+                <div class="reveal">
+                    <div class="terminal mb-6">
+                        <div class="terminal-header">
+                            <span class="terminal-btn bg-cyber-red"></span>
+                            <span class="terminal-btn bg-yellow-500"></span>
+                            <span class="terminal-btn bg-cyber-green"></span>
+                            <span class="text-gray-500 text-xs ml-2 truncate">whoami.sh</span>
+                        </div>
+                        <div class="p-4 sm:p-6">
+                            <p class="text-cyber-green mb-3 text-sm">$ whoami</p>
+                            <p class="text-gray-300 leading-relaxed mb-4 text-sm sm:text-base">
+                                Sou <span class="text-cyber-green font-bold">Natanael Evangelista</span>, 
+                                formado em <span class="text-cyber-cyan">Cybersecurity</span> e 
+                                <span class="text-cyber-cyan">Automação de Processos</span>.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed mb-4 text-sm sm:text-base">
+                                Atuo com empresas para fortalecer suas infraestruturas tecnológicas, 
+                                identificando vulnerabilidades e implementando soluções de segurança robustas.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                Minha missão é <span class="text-cyber-green">proteger ativos digitais</span> e 
+                                <span class="text-cyber-cyan">otimizar processos</span>, sempre com foco em resultados mensuráveis.
+                            </p>
+                            <p class="text-cyber-green mt-4 animate-pulse text-sm">$ _</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="reveal">
+                    <h3 class="text-white font-bold text-lg mb-6 flex items-center gap-2">
+                        <ion-icon name="shield-checkmark-outline" class="text-cyber-green"></ion-icon>
+                        Áreas de Atuação
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="cyber-card p-5 rounded-lg group">
+                            <div class="w-12 h-12 bg-cyber-green/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyber-green/20 transition-colors">
+                                <ion-icon name="skull-outline" class="text-cyber-green text-2xl"></ion-icon>
+                            </div>
+                            <h4 class="text-white font-bold mb-2">Ethical Hacking</h4>
+                            <p class="text-gray-500 text-sm">Red Team & Penetration Testing</p>
+                        </div>
+
+                        <div class="cyber-card p-5 rounded-lg group">
+                            <div class="w-12 h-12 bg-cyber-cyan/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyber-cyan/20 transition-colors">
+                                <ion-icon name="cog-outline" class="text-cyber-cyan text-2xl"></ion-icon>
+                            </div>
+                            <h4 class="text-white font-bold mb-2">RPA</h4>
+                            <p class="text-gray-500 text-sm">Automação com Python & N8N</p>
+                        </div>
+
+                        <div class="cyber-card p-5 rounded-lg group">
+                            <div class="w-12 h-12 bg-cyber-purple/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyber-purple/20 transition-colors">
+                                <ion-icon name="headset-outline" class="text-cyber-purple text-2xl"></ion-icon>
+                            </div>
+                            <h4 class="text-white font-bold mb-2">Suporte Técnico</h4>
+                            <p class="text-gray-500 text-sm">Help Desk N1 & N2</p>
+                        </div>
+
+                        <div class="cyber-card p-5 rounded-lg group">
+                            <div class="w-12 h-12 bg-cyber-red/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyber-red/20 transition-colors">
+                                <ion-icon name="hardware-chip-outline" class="text-cyber-red text-2xl"></ion-icon>
+                            </div>
+                            <h4 class="text-white font-bold mb-2">Hardware</h4>
+                            <p class="text-gray-500 text-sm">Manutenção Avançada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 sm:py-20 bg-cyber-dark/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal">
+                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center gap-4">
+                    <span class="text-cyber-green">//</span> SKILLS
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-8 sm:mb-12"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Technical Skills -->
+                <div class="reveal">
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-btn bg-cyber-red"></span>
+                            <span class="terminal-btn bg-yellow-500"></span>
+                            <span class="terminal-btn bg-cyber-green"></span>
+                            <span class="text-gray-500 text-xs ml-2 truncate">skills.json</span>
+                        </div>
+                        <div class="p-4 sm:p-6 space-y-5">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-cyber-green text-sm">Cyber Security</span>
+                                    <span class="text-gray-500 text-sm">80%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-cyber-cyan text-sm">RPA / Automação</span>
+                                    <span class="text-gray-500 text-sm">70%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 70%;"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-cyber-purple text-sm">Computer Repair</span>
+                                    <span class="text-gray-500 text-sm">90%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-cyber-red text-sm">Python</span>
+                                    <span class="text-gray-500 text-sm">50%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 50%;"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-white text-sm">Networking</span>
+                                    <span class="text-gray-500 text-sm">75%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="reveal">
+                    <h3 class="text-white font-bold text-lg mb-6 flex items-center gap-2">
+                        <ion-icon name="construct-outline" class="text-cyber-green"></ion-icon>
+                        Ferramentas & Tecnologias
+                    </h3>
+                    <div class="flex flex-wrap gap-2 sm:gap-3">
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-green/30 rounded text-xs sm:text-sm text-cyber-green hover:bg-cyber-green/10 transition-colors">Kali Linux</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-cyan/30 rounded text-xs sm:text-sm text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors">Metasploit</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-purple/30 rounded text-xs sm:text-sm text-cyber-purple hover:bg-cyber-purple/10 transition-colors">Burp Suite</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-red/30 rounded text-xs sm:text-sm text-cyber-red hover:bg-cyber-red/10 transition-colors">Nmap</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-green/30 rounded text-xs sm:text-sm text-cyber-green hover:bg-cyber-green/10 transition-colors">Python</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-cyan/30 rounded text-xs sm:text-sm text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors">N8N</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-purple/30 rounded text-xs sm:text-sm text-cyber-purple hover:bg-cyber-purple/10 transition-colors">GLPI</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-red/30 rounded text-xs sm:text-sm text-cyber-red hover:bg-cyber-red/10 transition-colors">Wireshark</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-green/30 rounded text-xs sm:text-sm text-cyber-green hover:bg-cyber-green/10 transition-colors">Git</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-cyan/30 rounded text-xs sm:text-sm text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors">Docker</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-white/30 rounded text-xs sm:text-sm text-white hover:bg-white/10 transition-colors">Active Directory</span>
+                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-green/30 rounded text-xs sm:text-sm text-cyber-green hover:bg-cyber-green/10 transition-colors">SQLMap</span>
+                    </div>
+
+                    <!-- Certifications -->
+                    <h3 class="text-white font-bold text-lg mt-8 mb-6 flex items-center gap-2">
+                        <ion-icon name="ribbon-outline" class="text-cyber-cyan"></ion-icon>
+                        Certificações
+                    </h3>
+                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+                        <a href="https://www.udemy.com/certificate/UC-26ec2d8b-86dd-4f1c-9417-3102b5f21b7a/" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Ethical Hacking">
+                            <img src="./img/logo-1.png" alt="Udemy" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
+                        </a>
+                        <a href="https://desecsecurity.com/valida-certificado/LIJJ-QVKIR-SFUQ" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Pentest Profissional">
+                            <img src="./img/logo-2.png" alt="Desec" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
+                        </a>
+                        <a href="https://www.linkedin.com/learning/certificates/5a86355f50f3663fcb7aa8a48376c1d0caf460ae9632edbb9fa58a93d5b31c6b" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Cybersecurity">
+                            <img src="./img/logo-3.png" alt="LinkedIn" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
+                        </a>
+                        <a href="https://www.linkedin.com/learning/certificates/0dbd5d505aa8e0c468e11af12f145dfb0e1c47f28f5ca8c3efc71a8c6f935ca0" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="LGPD">
+                            <img src="./img/logo-4.png" alt="LinkedIn" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
+                        </a>
+                        <a href="https://www.conquerplus.com.br/certificates/831c5500-523f-4704-9b66-84f8b34e093d?enrollment" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Power BI">
+                            <img src="./img/logo-5.png" alt="Conquer" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
+                        </a>
+                        <a href="https://drive.google.com/file/d/1TB1oBiUGR-0H-Q0NRWL40U59t6-S4_BA/view" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Metasploit">
+                            <img src="./img/logo-6.png" alt="Hackers Hive" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 sm:py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal">
+                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center gap-4">
+                    <span class="text-cyber-green">//</span> EXPERIÊNCIA
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-8 sm:mb-12"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Work -->
+                <div class="reveal">
+                    <h3 class="text-cyber-green font-mono text-base sm:text-lg mb-6 flex items-center gap-2">
+                        <ion-icon name="briefcase-outline"></ion-icon> Profissional
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-green">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+                                <h4 class="text-white font-bold text-sm sm:text-base">Acamef/Academia do Bancário</h4>
+                                <span class="text-cyber-green text-xs sm:text-sm">2023 - 2024</span>
+                            </div>
+                            <p class="text-gray-400 text-xs sm:text-sm">Automação de workflows e gestão da plataforma Moodle</p>
+                        </div>
+                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-cyan">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+                                <h4 class="text-white font-bold text-sm sm:text-base">Blend IT Consultoria</h4>
+                                <span class="text-cyber-cyan text-xs sm:text-sm">2022 - 2023</span>
+                            </div>
+                            <p class="text-gray-400 text-xs sm:text-sm">Suporte CSC, Active Directory e segurança</p>
+                        </div>
+                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-purple">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+                                <h4 class="text-white font-bold text-sm sm:text-base">Sete Ambiental Logística</h4>
+                                <span class="text-cyber-purple text-xs sm:text-sm">2021 - 2022</span>
+                            </div>
+                            <p class="text-gray-400 text-xs sm:text-sm">Manutenção avançada e monitoramento de segurança</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="reveal">
+                    <h3 class="text-cyber-cyan font-mono text-base sm:text-lg mb-6 flex items-center gap-2">
+                        <ion-icon name="school-outline"></ion-icon> Formação
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-green">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+                                <h4 class="text-white font-bold text-sm sm:text-base">Universidade Uninter</h4>
+                                <span class="text-cyber-green text-xs sm:text-sm">2025 - Atual</span>
+                            </div>
+                            <p class="text-gray-400 text-xs sm:text-sm">Graduação em Cybersecurity</p>
+                        </div>
+                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-cyan">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+                                <h4 class="text-white font-bold text-sm sm:text-base">Desec Security</h4>
+                                <span class="text-cyber-cyan text-xs sm:text-sm">2024 - 2025</span>
+                            </div>
+                            <p class="text-gray-400 text-xs sm:text-sm">Pentesting & Red Team Operations</p>
+                        </div>
+                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-purple">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+                                <h4 class="text-white font-bold text-sm sm:text-base">Elaborata Informática</h4>
+                                <span class="text-cyber-purple text-xs sm:text-sm">2020 - 2021</span>
+                            </div>
+                            <p class="text-gray-400 text-xs sm:text-sm">Manutenção Avançada de Hardware</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 sm:py-20 bg-cyber-dark/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal">
+                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center gap-4">
+                    <span class="text-cyber-green">//</span> RECOMENDAÇÕES
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-8 sm:mb-12"></div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 reveal">
+                <div class="cyber-card p-4 sm:p-6 rounded-xl testimonial-card">
+                    <div class="flex items-center gap-3 sm:gap-4 mb-4">
+                        <img src="./img/depoimento1.png" alt="Victor Bufalari" class="w-12 h-12 rounded-full flex-shrink-0 object-cover">
+                        <div class="min-w-0">
+                            <h4 class="text-white font-bold text-sm sm:text-base truncate">Victor Bufalari</h4>
+                            <p class="text-cyber-green text-xs truncate">Coordenador - Grupo Positivo</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Profissional altamente qualificado e ágil, sempre dedicado a prestar suporte em TI. Contribuiu positivamente para o trabalho em equipe."</p>
+                </div>
+
+                <div class="cyber-card p-4 sm:p-6 rounded-xl testimonial-card">
+                    <div class="flex items-center gap-3 sm:gap-4 mb-4">
+                        <img src="./img/depoimento2.png" alt="Elisângela Bassete" class="w-12 h-12 rounded-full flex-shrink-0 object-cover">
+                        <div class="min-w-0">
+                            <h4 class="text-white font-bold text-sm sm:text-base truncate">Elisângela Bassete</h4>
+                            <p class="text-cyber-cyan text-xs truncate">Diretora - Sete Ambiental</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Natan é dedicado, inteligente e profissional. Possui muitas habilidades e grande capacidade de trabalhar em equipe."</p>
+                </div>
+
+                <div class="cyber-card p-4 sm:p-6 rounded-xl testimonial-card">
+                    <div class="flex items-center gap-3 sm:gap-4 mb-4">
+                        <img src="./img/depoimento3.png" alt="Jaqueline Monteiro" class="w-12 h-12 rounded-full flex-shrink-0 object-cover">
+                        <div class="min-w-0">
+                            <h4 class="text-white font-bold text-sm sm:text-base truncate">Jaqueline Monteiro</h4>
+                            <p class="text-cyber-purple text-xs truncate">Representante Comercial</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Profissional de primeira. Habilidades incríveis, resolve situações desafiadoras e executa seu trabalho com maestria."</p>
+                </div>
+
+                <div class="cyber-card p-4 sm:p-6 rounded-xl testimonial-card">
+                    <div class="flex items-center gap-3 sm:gap-4 mb-4">
+                        <img src="./img/depoimentos4.png" alt="Michael Douglas" class="w-12 h-12 rounded-full flex-shrink-0 object-cover">
+                        <div class="min-w-0">
+                            <h4 class="text-white font-bold text-sm sm:text-base truncate">Michael Douglas</h4>
+                            <p class="text-cyber-red text-xs truncate">Assistente de Produto</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Fortes habilidades técnicas e excelente visão em tecnologia. Destaco sua empatia e excelentes habilidades de comunicação."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 sm:py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center">
+                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center justify-center gap-4">
+                    <span class="text-cyber-green">//</span> CONTATO
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-4 mx-auto"></div>
+                <p class="text-gray-400 text-sm sm:text-base mb-8">Vamos conversar sobre como posso ajudar sua empresa</p>
+            </div>
+
+            <div class="terminal max-w-xl mx-auto reveal">
+                <div class="terminal-header">
+                    <span class="terminal-btn bg-cyber-red"></span>
+                    <span class="terminal-btn bg-yellow-500"></span>
+                    <span class="terminal-btn bg-cyber-green"></span>
+                    <span class="text-gray-500 text-xs ml-2 truncate">contact.sh</span>
+                </div>
+                <div class="p-4 sm:p-6 space-y-4">
+                    <a href="mailto:natanaellima65@gmail.com" class="flex items-center gap-3 sm:gap-4 text-gray-300 hover:text-cyber-green transition-colors group p-2 rounded hover:bg-cyber-green/5">
+                        <ion-icon name="mail-outline" class="text-cyber-green text-xl flex-shrink-0"></ion-icon>
+                        <span class="text-sm truncate">natanaellima65@gmail.com</span>
+                    </a>
+                    <a href="https://wa.me/351910617161" target="_blank" class="flex items-center gap-3 sm:gap-4 text-gray-300 hover:text-cyber-cyan transition-colors group p-2 rounded hover:bg-cyber-cyan/5">
+                        <ion-icon name="logo-whatsapp" class="text-cyber-cyan text-xl flex-shrink-0"></ion-icon>
+                        <span class="text-sm">+351 910 617 161</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" class="flex items-center gap-3 sm:gap-4 text-gray-300 hover:text-cyber-purple transition-colors group p-2 rounded hover:bg-cyber-purple/5">
+                        <ion-icon name="logo-linkedin" class="text-cyber-purple text-xl flex-shrink-0"></ion-icon>
+                        <span class="text-sm truncate">linkedin.com/in/natanaellima10</span>
+                    </a>
+                    <a href="https://github.com/ademakin3051" target="_blank" class="flex items-center gap-3 sm:gap-4 text-gray-300 hover:text-white transition-colors group p-2 rounded hover:bg-white/5">
+                        <ion-icon name="logo-github" class="text-white text-xl flex-shrink-0"></ion-icon>
+                        <span class="text-sm truncate">github.com/ademakin3051</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Social Icons -->
+            <div class="flex items-center justify-center gap-4 sm:gap-6 mt-8 reveal">
+                <a href="https://github.com/ademakin3051" target="_blank" class="w-12 h-12 bg-cyber-gray border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:border-white transition-all hover:scale-110">
+                    <ion-icon name="logo-github" class="text-xl"></ion-icon>
+                </a>
+                <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" class="w-12 h-12 bg-cyber-gray border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan transition-all hover:scale-110">
+                    <ion-icon name="logo-linkedin" class="text-xl"></ion-icon>
+                </a>
+                <a href="https://wa.me/351910617161" target="_blank" class="w-12 h-12 bg-cyber-gray border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyber-green hover:border-cyber-green transition-all hover:scale-110">
+                    <ion-icon name="logo-whatsapp" class="text-xl"></ion-icon>
+                </a>
+                <a href="mailto:natanaellima65@gmail.com" class="w-12 h-12 bg-cyber-gray border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyber-red hover:border-cyber-red transition-all hover:scale-110">
+                    <ion-icon name="mail-outline" class="text-xl"></ion-icon>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-gray-500 text-sm">
+                    <span class="text-cyber-green">&lt;</span>2025<span class="text-cyber-green">/&gt;</span> Natanael Lima • Red Team Specialist
+                </p>
+                <p class="text-gray-600 text-xs">
+                    <span class="text-cyber-green">$</span> echo "Built with <span class="text-cyber-red">♥</span> and <span class="text-cyber-cyan">code</span>"
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Typing Effect
+        const typingText = document.getElementById('typingText');
+        const phrases = ['Hardware Support', 'Penetration Tester', 'Ethical Hacker', 'System Support', 'RPA Developer'];
+        let phraseIndex = 0, charIndex = 0, isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            typingText.textContent = isDeleting 
+                ? currentPhrase.substring(0, --charIndex)
+                : currentPhrase.substring(0, ++charIndex);
+
+            let speed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentPhrase.length) { speed = 2000; isDeleting = true; }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; speed = 500; }
+            setTimeout(typeEffect, speed);
+        }
+        typeEffect();
+
+        // Matrix Rain
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 14;
+        let columns = canvas.width / fontSize;
+        let drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px JetBrains Mono';
+            for (let i = 0; i < drops.length; i++) {
+                ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = canvas.width / fontSize;
+            drops = Array(Math.floor(columns)).fill(1);
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        function reveal() {
+            revealElements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        reveal();
+
+        // Active Nav
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + 100;
+            sections.forEach(section => {
+                if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${section.id}`) link.classList.add('active');
+                    });
+                }
+            });
+        });
+
+        // Skill Bars Animation
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+        let animated = false;
+        function animateSkills() {
+            const skillsSection = document.getElementById('skills');
+            if (skillsSection.getBoundingClientRect().top < window.innerHeight - 100 && !animated) {
+                skillBars.forEach(bar => {
+                    const w = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => bar.style.width = w, 100);
+                });
+                animated = true;
+            }
+        }
+        window.addEventListener('scroll', animateSkills);
+    </script>
+</body>
+</html>
