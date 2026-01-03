@@ -46,28 +46,6 @@
 
         .glow-green { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 40px #00ff41; }
 
-        .cyber-card {
-            background: linear-gradient(145deg, #12121a 0%, #0a0a0f 100%);
-            border: 1px solid rgba(0, 255, 65, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .cyber-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-        .cyber-card:hover::before { left: 100%; }
-        .cyber-card:hover {
-            border-color: #00ff41;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 255, 65, 0.2);
-        }
-
         .project-card-featured {
             background: linear-gradient(145deg, #12121a 0%, #0a0a0f 100%);
             border: 2px solid rgba(0, 255, 65, 0.3);
@@ -111,10 +89,65 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
+            background: rgba(0, 255, 65, 0.2);
+            color: #00ff41;
+            border: 1px solid #00ff41;
         }
-        .status-complete { background: rgba(0, 255, 65, 0.2); color: #00ff41; border: 1px solid #00ff41; }
-        .status-progress { background: rgba(0, 212, 255, 0.2); color: #00d4ff; border: 1px solid #00d4ff; }
-        .status-planned { background: rgba(139, 0, 255, 0.2); color: #8b00ff; border: 1px solid #8b00ff; }
+
+        /* Expandable Projects Section */
+        .all-projects-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            opacity: 0;
+        }
+        .all-projects-container.expanded {
+            max-height: 2000px;
+            opacity: 1;
+        }
+        
+        .expand-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .expand-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        .expand-btn:hover::before {
+            left: 100%;
+        }
+
+        .project-grid-card {
+            background: linear-gradient(145deg, #12121a 0%, #0a0a0f 100%);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        .project-grid-card:hover {
+            border-color: #00ff41;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 255, 65, 0.25);
+        }
+        .project-grid-card:hover .project-grid-img {
+            transform: scale(1.1);
+        }
+        .project-grid-img {
+            transition: transform 0.5s ease;
+        }
+
+        .chevron-icon {
+            transition: transform 0.4s ease;
+        }
+        .chevron-icon.rotated {
+            transform: rotate(180deg);
+        }
 
         @media (max-width: 768px) {
             .scanlines::before { display: none; }
@@ -178,14 +211,14 @@
     <section class="py-12 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Project 1: Featured -->
+            <!-- Project 1: Featured - Chatbot GLPI -->
             <div class="project-card-featured rounded-2xl overflow-hidden mb-12 reveal">
                 <div class="grid lg:grid-cols-2">
                     <div class="relative h-64 lg:h-auto overflow-hidden">
                         <img src="./img/projeto1.png" alt="Chatbot GLPI" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-r from-cyber-black via-cyber-black/80 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-cyber-black/50 lg:to-cyber-black"></div>
                         <div class="absolute top-4 left-4">
-                            <span class="status-badge status-complete">Completo</span>
+                            <span class="status-badge">Completo</span>
                         </div>
                     </div>
                     <div class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
@@ -227,7 +260,7 @@
                 </div>
             </div>
 
-            <!-- Project 2: Featured -->
+            <!-- Project 2: Featured - Digitador Automático -->
             <div class="project-card-featured rounded-2xl overflow-hidden mb-12 reveal">
                 <div class="grid lg:grid-cols-2">
                     <div class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center order-2 lg:order-1">
@@ -269,8 +302,170 @@
                         <img src="./img/projeto2.png" alt="Digitador Automático" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-l from-cyber-black via-cyber-black/80 to-transparent lg:bg-gradient-to-l lg:from-transparent lg:via-cyber-black/50 lg:to-cyber-black"></div>
                         <div class="absolute top-4 right-4">
-                            <span class="status-badge status-complete">Completo</span>
+                            <span class="status-badge">Completo</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ver Todos os Projetos Button -->
+            <div class="text-center reveal">
+                <button id="expandProjectsBtn" class="expand-btn inline-flex items-center gap-3 px-8 py-4 bg-cyber-dark border-2 border-cyber-green text-cyber-green font-bold rounded-lg transition-all hover:bg-cyber-green/10 hover:scale-105 group">
+                    <ion-icon name="grid-outline" class="text-xl"></ion-icon>
+                    <span id="expandBtnText">Ver Todos os Projetos</span>
+                    <ion-icon name="chevron-down-outline" class="text-xl chevron-icon" id="chevronIcon"></ion-icon>
+                </button>
+            </div>
+
+            <!-- All Projects Grid (Expandable) -->
+            <div id="allProjectsContainer" class="all-projects-container">
+                <div class="border-t border-cyber-green/20 pt-12 mt-12">
+                    <h3 class="font-cyber text-xl sm:text-2xl text-white mb-8 flex items-center gap-3">
+                        <ion-icon name="apps-outline" class="text-cyber-green"></ion-icon>
+                        Todos os Projetos
+                    </h3>
+                    
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <!-- Project Card 1 - Chatbot GLPI -->
+                        <div class="project-grid-card rounded-xl group">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="./img/projeto1.png" alt="Chatbot GLPI" class="w-full h-full object-cover project-grid-img">
+                                <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-cyber-black/50 to-transparent"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="status-badge text-xs">Completo</span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <ion-icon name="chatbubbles-outline" class="text-cyber-cyan"></ion-icon>
+                                    <span class="text-cyber-cyan text-xs uppercase tracking-wider">RPA + AI</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg mb-2 group-hover:text-cyber-green transition-colors">Chatbot GLPI</h4>
+                                <p class="text-gray-500 text-sm mb-4 line-clamp-2">Chatbot de suporte inteligente com N8N, GLPI e OpenAI</p>
+                                <div class="flex gap-2">
+                                    <a href="https://github.com/ademakin3051/botglpi" target="_blank" class="flex-1 text-center py-2 bg-cyber-green/10 border border-cyber-green/30 text-cyber-green text-xs rounded hover:bg-cyber-green/20 transition-colors">
+                                        GitHub
+                                    </a>
+                                    <a href="https://youtu.be/EqQT7VZ-78E" target="_blank" class="flex-1 text-center py-2 bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs rounded hover:bg-cyber-cyan/20 transition-colors">
+                                        Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 2 - Digitador Automático -->
+                        <div class="project-grid-card rounded-xl group">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="./img/projeto2.png" alt="Digitador Automático" class="w-full h-full object-cover project-grid-img">
+                                <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-cyber-black/50 to-transparent"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="status-badge text-xs">Completo</span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <ion-icon name="create-outline" class="text-cyber-green"></ion-icon>
+                                    <span class="text-cyber-green text-xs uppercase tracking-wider">Automação</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg mb-2 group-hover:text-cyber-green transition-colors">Digitador Automático</h4>
+                                <p class="text-gray-500 text-sm mb-4 line-clamp-2">Aplicação Python para automatização de digitação</p>
+                                <div class="flex gap-2">
+                                    <a href="https://github.com/ademakin3051/digitador-automatico" target="_blank" class="flex-1 text-center py-2 bg-cyber-green/10 border border-cyber-green/30 text-cyber-green text-xs rounded hover:bg-cyber-green/20 transition-colors">
+                                        GitHub
+                                    </a>
+                                    <a href="https://youtu.be/trLHH-mYcH4" target="_blank" class="flex-1 text-center py-2 bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs rounded hover:bg-cyber-cyan/20 transition-colors">
+                                        Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 3 - Port Scanner Pro (Fictício) -->
+                        <div class="project-grid-card rounded-xl group">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="./img/projeto3.png" alt="Digitador Automático" class="w-full h-full object-cover project-grid-img">
+                                <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-cyber-black/50 to-transparent"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="status-badge text-xs">Completo</span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <ion-icon name="shield-half-outline" class="text-cyber-red"></ion-icon>
+                                    <span class="text-cyber-red text-xs uppercase tracking-wider">Recon RedTeam</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg mb-2 group-hover:text-cyber-red transition-colors">Script GoogleDorks</h4>
+                                <p class="text-gray-500 text-sm mb-4 line-clamp-2">Script automatiza Google Dorks via API para identificar superfícies expostas públicas.</p>
+                                <div class="flex gap-2">
+                                    <a href="https://github.com/ademakin3051/ferramentagoogledorks" target="_blank" class="flex-1 text-center py-2 bg-cyber-green/10 border border-cyber-green/30 text-cyber-green text-xs rounded hover:bg-cyber-green/20 transition-colors">
+                                        GitHub
+                                    </a>
+                                    <a href="https://youtu.be/EfaL-Qc4lK4" target="_blank" class="flex-1 text-center py-2 bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs rounded hover:bg-cyber-cyan/20 transition-colors">
+                                        Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 4 - Hash Identifier (Fictício)
+                        <div class="project-grid-card rounded-xl group">
+                            <div class="relative h-48 overflow-hidden bg-gradient-to-br from-cyber-purple/20 to-cyber-dark">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <ion-icon name="key-outline" class="text-cyber-purple text-6xl opacity-50"></ion-icon>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-cyber-black/50 to-transparent"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="status-badge text-xs">Completo</span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <ion-icon name="lock-open-outline" class="text-cyber-purple"></ion-icon>
+                                    <span class="text-cyber-purple text-xs uppercase tracking-wider">Crypto</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg mb-2 group-hover:text-cyber-purple transition-colors">Hash Identifier</h4>
+                                <p class="text-gray-500 text-sm mb-4 line-clamp-2">Ferramenta para identificação e análise de hashes com múltiplos algoritmos</p>
+                                <div class="flex gap-2">
+                                    <a href="https://github.com/ademakin3051" target="_blank" class="flex-1 text-center py-2 bg-cyber-green/10 border border-cyber-green/30 text-cyber-green text-xs rounded hover:bg-cyber-green/20 transition-colors">
+                                        GitHub
+                                    </a>
+                                    <a href="#" class="flex-1 text-center py-2 bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs rounded hover:bg-cyber-cyan/20 transition-colors">
+                                        Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <!-- Project Card 5 - Log Analyzer (Fictício)
+                        <div class="project-grid-card rounded-xl group">
+                            <div class="relative h-48 overflow-hidden bg-gradient-to-br from-cyber-cyan/20 to-cyber-dark">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <ion-icon name="analytics-outline" class="text-cyber-cyan text-6xl opacity-50"></ion-icon>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-cyber-black/50 to-transparent"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="status-badge text-xs">Completo</span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <ion-icon name="document-text-outline" class="text-cyber-cyan"></ion-icon>
+                                    <span class="text-cyber-cyan text-xs uppercase tracking-wider">Analysis</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg mb-2 group-hover:text-cyber-cyan transition-colors">Log Analyzer</h4>
+                                <p class="text-gray-500 text-sm mb-4 line-clamp-2">Analisador de logs com detecção de padrões suspeitos e alertas</p>
+                                <div class="flex gap-2">
+                                    <a href="https://github.com/ademakin3051" target="_blank" class="flex-1 text-center py-2 bg-cyber-green/10 border border-cyber-green/30 text-cyber-green text-xs rounded hover:bg-cyber-green/20 transition-colors">
+                                        GitHub
+                                    </a>
+                                    <a href="#" class="flex-1 text-center py-2 bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs rounded hover:bg-cyber-cyan/20 transition-colors">
+                                        Demo
+                                    </a>
+                                </div>-->
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -291,31 +486,31 @@
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
                 <!-- Upcoming 1 -->
-                <div class="cyber-card p-6 rounded-xl">
+                <div class="project-grid-card p-6 rounded-xl">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-cyber-red/20 rounded-lg flex items-center justify-center">
                             <ion-icon name="bug-outline" class="text-cyber-red text-2xl"></ion-icon>
                         </div>
-                        <span class="status-badge status-progress">Em Dev</span>
+                        <span class="status-badge" style="background: rgba(0, 212, 255, 0.2); color: #00d4ff; border-color: #00d4ff;">Em Dev</span>
                     </div>
-                    <h3 class="text-white font-bold text-lg mb-2">Google Dorks</h3>
-                    <p class="text-gray-500 text-sm mb-4">Script automatizado para identificação de dominios e subdominios anexados no google com api</p>
+                    <h3 class="text-white font-bold text-lg mb-2">Analisador de hashes</h3>
+                    <p class="text-gray-500 text-sm mb-4">Script automatizado para identificação de hashes e descritografia</p>
                     <div class="flex flex-wrap gap-2">
                         <span class="text-xs text-cyber-red">Python</span>
                         <span class="text-xs text-gray-500">•</span>
-                        <span class="text-xs text-cyber-cyan">OWASP</span>
+                        <span class="text-xs text-cyber-cyan">Bash Script</Script><Script></Script></span>
                         <span class="text-xs text-gray-500">•</span>
-                        <span class="text-xs text-cyber-green">API</span>
+                        <span class="text-xs text-cyber-green">Dicionarios</span>
                     </div>
                 </div>
 
                 <!-- Upcoming 2 -->
-                <div class="cyber-card p-6 rounded-xl">
+                <div class="project-grid-card p-6 rounded-xl">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-cyber-purple/20 rounded-lg flex items-center justify-center">
                             <ion-icon name="wifi-outline" class="text-cyber-purple text-2xl"></ion-icon>
                         </div>
-                        <span class="status-badge status-planned">Planejado</span>
+                        <span class="status-badge" style="background: rgba(139, 0, 255, 0.2); color: #8b00ff; border-color: #8b00ff;">Planejado</span>
                     </div>
                     <h3 class="text-white font-bold text-lg mb-2">Network Monitor</h3>
                     <p class="text-gray-500 text-sm mb-4">Dashboard em tempo real para monitoramento de tráfego e anomalias de rede com ajuda em tempo real de I.A</p>
@@ -329,12 +524,12 @@
                 </div>
 
                 <!-- Upcoming 3 -->
-                <div class="cyber-card p-6 rounded-xl">
+                <div class="project-grid-card p-6 rounded-xl">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-cyber-cyan/20 rounded-lg flex items-center justify-center">
                             <ion-icon name="fish-outline" class="text-cyber-cyan text-2xl"></ion-icon>
                         </div>
-                        <span class="status-badge status-planned">Planejado</span>
+                        <span class="status-badge" style="background: rgba(139, 0, 255, 0.2); color: #8b00ff; border-color: #8b00ff;">Planejado</span>
                     </div>
                     <h3 class="text-white font-bold text-lg mb-2">Phishing Detector</h3>
                     <p class="text-gray-500 text-sm mb-4">Ferramenta de análise e detecção de sites de phishing com machine learning</p>
@@ -351,7 +546,7 @@
     </section>
 
     <!-- Terminal Section -->
-    <section class="py-12 relative">
+    <section class="py-12 bg-cyber-dark/30 relative">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="terminal reveal">
                 <div class="terminal-header">
@@ -364,7 +559,7 @@
                     <p class="text-cyber-green mb-4">$ cat project_stats.json</p>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
                         <div>
-                            <p class="font-cyber text-2xl sm:text-3xl text-cyber-green">2</p>
+                            <p class="font-cyber text-2xl sm:text-3xl text-cyber-green">3</p>
                             <p class="text-gray-500 text-xs">Completos</p>
                         </div>
                         <div>
@@ -418,6 +613,32 @@
         // Mobile Menu
         document.getElementById('menuBtn').addEventListener('click', () => {
             document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Expand Projects Toggle
+        const expandBtn = document.getElementById('expandProjectsBtn');
+        const allProjectsContainer = document.getElementById('allProjectsContainer');
+        const chevronIcon = document.getElementById('chevronIcon');
+        const expandBtnText = document.getElementById('expandBtnText');
+        let isExpanded = false;
+
+        expandBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            
+            if (isExpanded) {
+                allProjectsContainer.classList.add('expanded');
+                chevronIcon.classList.add('rotated');
+                expandBtnText.textContent = 'Ocultar Projetos';
+                
+                // Scroll suave para a seção expandida
+                setTimeout(() => {
+                    allProjectsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            } else {
+                allProjectsContainer.classList.remove('expanded');
+                chevronIcon.classList.remove('rotated');
+                expandBtnText.textContent = 'Ver Todos os Projetos';
+            }
         });
 
         // Matrix Rain
