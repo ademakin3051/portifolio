@@ -1,190 +1,142 @@
-/* ==========================================================================
-   Natanael Lima — Cyber Security Portfolio
-   Shared behaviour: navigation, reveal-on-scroll, terminal typing,
-   role typing, project index toggle and blog filters.
-   ========================================================================== */
+/* Natanael Lima — interações do site (sem dependências) */
 (function () {
-    'use strict';
+  'use strict';
 
-    const root = document.documentElement;
-    root.classList.remove('no-js');
-    root.classList.add('js');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  /* ---------- Navbar: sombra ao rolar ---------- */
+  var nav = document.querySelector('.nav');
+  function onScroll() {
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 8);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-    /* ---------------------------------------------------------------
-       Navigation: scrolled state + mobile menu
-       --------------------------------------------------------------- */
-    const nav = document.querySelector('[data-nav]');
-    const toggle = document.querySelector('[data-nav-toggle]');
-    const mobileMenu = document.getElementById('mobileMenu');
+  /* ---------- Menu mobile ---------- */
+  var menuBtn = document.getElementById('menuBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn && mobileMenu) {
+    var setMenu = function (open) {
+      mobileMenu.classList.toggle('open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      menuBtn.querySelector('use').setAttribute('href', open ? '#i-close' : '#i-menu');
+    };
+    menuBtn.addEventListener('click', function () {
+      setMenu(!mobileMenu.classList.contains('open'));
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () { setMenu(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setMenu(false);
+    });
+  }
 
-    if (nav) {
-        const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 12);
-        onScroll();
-        window.addEventListener('scroll', onScroll, { passive: true });
-    }
-
-    function setMenu(open) {
-        if (!nav || !toggle) return;
-        nav.classList.toggle('is-open', open);
-        toggle.setAttribute('aria-expanded', String(open));
-        toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-        document.body.style.overflow = open ? 'hidden' : '';
-    }
-
-    if (toggle && mobileMenu) {
-        toggle.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
-        mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
-        window.addEventListener('resize', () => { if (window.innerWidth > 960) setMenu(false); });
-    }
-
-    /* ---------------------------------------------------------------
-       Active nav link for in-page sections (home page)
-       --------------------------------------------------------------- */
-    const sectionLinks = document.querySelectorAll('[data-section-link]');
-    if (sectionLinks.length && 'IntersectionObserver' in window) {
-        const byId = {};
-        sectionLinks.forEach((link) => {
-            const id = link.getAttribute('data-section-link');
-            (byId[id] = byId[id] || []).push(link);
+  /* ---------- Link ativo conforme a seção visível (home) ---------- */
+  var sectionLinks = document.querySelectorAll('[data-section]');
+  if (sectionLinks.length && 'IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var id = entry.target.id;
+        sectionLinks.forEach(function (a) {
+          a.classList.toggle('active', a.getAttribute('data-section') === id);
         });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main section[id]').forEach(function (s) { spy.observe(s); });
+  }
 
-        const spy = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                sectionLinks.forEach((l) => { l.classList.remove('is-active'); l.removeAttribute('aria-current'); });
-                (byId[entry.target.id] || []).forEach((l) => { l.classList.add('is-active'); l.setAttribute('aria-current', 'location'); });
-            });
-        }, { rootMargin: '-45% 0px -50% 0px' });
-
-        Object.keys(byId).forEach((id) => {
-            const section = document.getElementById(id);
-            if (section) spy.observe(section);
-        });
-    }
-
-    /* ---------------------------------------------------------------
-       Reveal on scroll
-       --------------------------------------------------------------- */
-    const revealEls = document.querySelectorAll('.reveal');
-    if (!reduceMotion && 'IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    io.unobserve(entry.target);
-                }
-            });
-        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-        revealEls.forEach((el) => io.observe(el));
-    } else {
-        revealEls.forEach((el) => el.classList.add('is-visible'));
-    }
-
-    /* ---------------------------------------------------------------
-       Hero terminal: types commands, then prints their output.
-       The full content is already in the HTML (works without JS).
-       --------------------------------------------------------------- */
-    const term = document.querySelector('[data-terminal]');
-    if (term && !reduceMotion) {
-        const lines = Array.from(term.querySelectorAll('.line'));
-        const cmds = lines.map((line) => {
-            const cmd = line.querySelector('.cmd');
-            const text = cmd ? cmd.textContent : null;
-            if (cmd) cmd.textContent = '';
-            line.style.visibility = 'hidden';
-            return { line, cmd, text };
-        });
-
-        (async function run() {
-            await sleep(450);
-            for (const item of cmds) {
-                item.line.style.visibility = '';
-                if (item.cmd) {
-                    await sleep(260);
-                    for (const ch of item.text) {
-                        item.cmd.textContent += ch;
-                        await sleep(38 + Math.random() * 45);
-                    }
-                    await sleep(240);
-                } else {
-                    await sleep(90);
-                }
-            }
-        })();
-    }
-
-    /* ---------------------------------------------------------------
-       Rotating role typing
-       --------------------------------------------------------------- */
-    const typing = document.getElementById('typingText');
-    if (typing) {
-        const phrases = (typing.getAttribute('data-phrases') || '').split('|').filter(Boolean);
-        if (phrases.length) {
-            if (reduceMotion) {
-                typing.textContent = phrases[0];
-            } else {
-                let p = 0, c = 0, deleting = false;
-                const tick = () => {
-                    const word = phrases[p];
-                    c += deleting ? -1 : 1;
-                    typing.textContent = word.substring(0, c);
-                    let delay = deleting ? 45 : 90;
-                    if (!deleting && c === word.length) { delay = 2000; deleting = true; }
-                    else if (deleting && c === 0) { deleting = false; p = (p + 1) % phrases.length; delay = 450; }
-                    setTimeout(tick, delay);
-                };
-                setTimeout(tick, 1200);
-            }
+  /* ---------- Revelação suave ao rolar ---------- */
+  var reveals = document.querySelectorAll('.reveal');
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
         }
-    }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  }
 
-    /* ---------------------------------------------------------------
-       Projects: expandable "Todos os Projetos" index
-       --------------------------------------------------------------- */
-    const expandBtn = document.getElementById('expandProjectsBtn');
-    const expandPanel = document.getElementById('allProjectsContainer');
-    if (expandBtn && expandPanel) {
-        const label = document.getElementById('expandBtnText');
-        expandBtn.addEventListener('click', () => {
-            const open = expandBtn.getAttribute('aria-expanded') !== 'true';
-            expandBtn.setAttribute('aria-expanded', String(open));
-            expandPanel.classList.toggle('is-open', open);
-            expandPanel.setAttribute('aria-hidden', String(!open));
-            if ('inert' in expandPanel) expandPanel.inert = !open;
-            if (label) label.textContent = open ? 'Ocultar Projetos' : 'Ver Todos os Projetos';
-            if (open) {
-                setTimeout(() => expandPanel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }), 300);
-            }
+  /* ---------- Terminal do hero ---------- */
+  var term = document.getElementById('heroTerm');
+  if (term) {
+    var roles = ['Hardware Support', 'Penetration Tester', 'Ethical Hacker', 'System Support', 'RPA Developer'];
+    var roleEl = document.getElementById('typingText');
+
+    var cycleRoles = function () {
+      if (!roleEl) return;
+      if (reduceMotion) { roleEl.textContent = roles.join(' / '); return; }
+      var i = 0, c = 0, del = false;
+      (function tick() {
+        var word = roles[i];
+        c += del ? -1 : 1;
+        roleEl.textContent = word.slice(0, c);
+        var wait = del ? 45 : 90;
+        if (!del && c === word.length) { wait = 1900; del = true; }
+        else if (del && c === 0) { del = false; i = (i + 1) % roles.length; wait = 400; }
+        setTimeout(tick, wait);
+      })();
+    };
+
+    var lines = term.querySelectorAll('[data-line]');
+    if (reduceMotion) {
+      lines.forEach(function (l) { l.hidden = false; });
+      cycleRoles();
+    } else {
+      lines.forEach(function (l) { l.hidden = true; });
+      var typeCmd = function (el, done) {
+        var target = el.querySelector('.cmd');
+        var text = target ? target.getAttribute('data-text') : '';
+        el.hidden = false;
+        if (!target) { setTimeout(done, 90); return; }
+        var n = 0;
+        (function step() {
+          target.textContent = text.slice(0, ++n);
+          if (n < text.length) setTimeout(step, 55 + Math.random() * 45);
+          else setTimeout(done, 260);
+        })();
+      };
+      var idx = 0;
+      var next = function () {
+        if (idx >= lines.length) { cycleRoles(); return; }
+        typeCmd(lines[idx++], next);
+      };
+      setTimeout(next, 700);
+    }
+  }
+
+  /* ---------- Projetos: alternar visualização ---------- */
+  var cases = document.getElementById('cases');
+  var viewBtns = document.querySelectorAll('[data-view]');
+  if (cases && viewBtns.length) {
+    viewBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var compact = btn.getAttribute('data-view') === 'compact';
+        cases.classList.toggle('compact', compact);
+        viewBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      });
+    });
+  }
+
+  /* ---------- Blog: filtro por categoria ---------- */
+  var filterBtns = document.querySelectorAll('[data-filter]');
+  var posts = document.querySelectorAll('.post[data-cat]');
+  if (filterBtns.length && posts.length) {
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var cat = btn.getAttribute('data-filter');
+        filterBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+        posts.forEach(function (p) {
+          p.hidden = !(cat === 'all' || p.getAttribute('data-cat') === cat);
         });
-    }
-
-    /* ---------------------------------------------------------------
-       Blog: category filters
-       --------------------------------------------------------------- */
-    const filters = document.querySelectorAll('[data-filter]');
-    const posts = document.querySelectorAll('[data-category]');
-    if (filters.length && posts.length) {
-        const empty = document.getElementById('postsEmpty');
-        filters.forEach((btn) => {
-            const key = btn.getAttribute('data-filter');
-            const count = key === 'all' ? posts.length : document.querySelectorAll(`[data-category~="${key}"]`).length;
-            const badge = btn.querySelector('.count');
-            if (badge) badge.textContent = count;
-
-            btn.addEventListener('click', () => {
-                filters.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-                let shown = 0;
-                posts.forEach((post) => {
-                    const match = key === 'all' || post.getAttribute('data-category').split(' ').includes(key);
-                    post.hidden = !match;
-                    if (match) { shown++; post.classList.add('is-visible'); }
-                });
-                if (empty) empty.hidden = shown !== 0;
-            });
-        });
-    }
+      });
+    });
+  }
 })();
