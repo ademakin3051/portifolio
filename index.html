@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,804 +7,666 @@
     <meta name="description" content="Especialista em Cybersecurity, Red Team, Penetration Testing e Automação de Processos. Transformando segurança em vantagem competitiva.">
     <meta name="keywords" content="cybersecurity, red team, penetration testing, ethical hacker, RPA, automation">
     <meta name="author" content="Natanael Lima">
-    
+    <meta name="theme-color" content="#07090b">
+    <link rel="canonical" href="https://natanaellima.blog/">
+
     <!-- Open Graph / LinkedIn -->
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://natanaellima.blog/">
     <meta property="og:title" content="Natanael Lima | Red Team Specialist">
     <meta property="og:description" content="Especialista em Cybersecurity, Red Team e Penetration Testing">
-    <meta property="og:image" content="./img/my-avatar.png">
-    
-    <link rel="shortcut icon" href="#" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta property="og:image" content="https://natanaellima.blog/img/my-avatar.png">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307090b'/%3E%3Crect x='.5' y='.5' width='31' height='31' rx='6.5' fill='none' stroke='%232fe39a' stroke-opacity='.5'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' text-anchor='middle' fill='%232fe39a'%3ENL%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'cyber-black': '#0a0a0f',
-                        'cyber-dark': '#12121a',
-                        'cyber-green': '#00ff41',
-                        'cyber-green-dim': '#00cc33',
-                        'cyber-cyan': '#00d4ff',
-                        'cyber-red': '#ff0040',
-                        'cyber-purple': '#8b00ff',
-                        'cyber-gray': '#1a1a2e',
-                        'cyber-yellow':'#FFD700'
-                    },
-                    fontFamily: {
-                        'mono': ['JetBrains Mono', 'monospace'],
-                        'cyber': ['Orbitron', 'sans-serif'],
-                    },
-                }
-            }
-        }
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Natanael Lima",
+        "jobTitle": "Red Team Specialist",
+        "url": "https://natanaellima.blog/",
+        "image": "https://natanaellima.blog/img/my-avatar.png",
+        "email": "mailto:natanaellima65@gmail.com",
+        "sameAs": ["https://github.com/ademakin3051", "https://www.linkedin.com/in/natanaellima10"]
+    }
     </script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'JetBrains Mono', monospace;
-            background: #0a0a0f;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0a0f; }
-        ::-webkit-scrollbar-thumb { background: #00ff41; border-radius: 3px; }
-
-        .matrix-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.03;
-        }
-
-        .scanlines::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        .glitch { position: relative; }
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-        }
-        .glitch::before { animation: glitch-1 0.4s infinite linear alternate-reverse; color: #00ff41; z-index: -1; }
-        .glitch::after { animation: glitch-2 0.4s infinite linear alternate-reverse; color: #ff0040; z-index: -2; }
-
-        @keyframes glitch-1 {
-            0%, 100% { clip-path: inset(0 0 95% 0); transform: translateX(-2px); }
-            20% { clip-path: inset(30% 0 60% 0); transform: translateX(2px); }
-            40% { clip-path: inset(50% 0 30% 0); transform: translateX(-2px); }
-            60% { clip-path: inset(70% 0 20% 0); transform: translateX(2px); }
-            80% { clip-path: inset(10% 0 80% 0); transform: translateX(-2px); }
-        }
-        @keyframes glitch-2 {
-            0%, 100% { clip-path: inset(95% 0 0 0); transform: translateX(2px); }
-            20% { clip-path: inset(60% 0 30% 0); transform: translateX(-2px); }
-            40% { clip-path: inset(30% 0 50% 0); transform: translateX(2px); }
-            60% { clip-path: inset(20% 0 70% 0); transform: translateX(-2px); }
-            80% { clip-path: inset(80% 0 10% 0); transform: translateX(2px); }
-        }
-
-        .glow-green { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 40px #00ff41; }
-        .box-glow { box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.05); }
-
-        .cyber-card {
-            background: linear-gradient(145deg, #12121a 0%, #0a0a0f 100%);
-            border: 1px solid rgba(0, 255, 65, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .cyber-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-        .cyber-card:hover::before { left: 100%; }
-        .cyber-card:hover {
-            border-color: #00ff41;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
-        }
-
-        .terminal {
-            background: rgba(10, 10, 15, 0.95);
-            border: 1px solid #00ff41;
-            border-radius: 8px;
-        }
-        .terminal-header {
-            background: linear-gradient(90deg, #1a1a2e, #12121a);
-            padding: 10px 15px;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .terminal-btn { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-
-        .skill-bar {
-            height: 6px;
-            background: rgba(0, 255, 65, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .skill-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #00ff41, #00d4ff);
-            border-radius: 3px;
-            transition: width 1s ease;
-        }
-
-        .nav-link { position: relative; transition: color 0.3s ease; }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px; left: 0;
-            width: 0; height: 2px;
-            background: #00ff41;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-
-        @keyframes pulseGreen {
-            0%, 100% { opacity: 1; box-shadow: 0 0 20px rgba(0, 255, 65, 0.5); }
-            50% { opacity: 0.8; box-shadow: 0 0 40px rgba(0, 255, 65, 0.8); }
-        }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        .grid-pattern {
-            background-image: linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-
-        @media (max-width: 768px) {
-            .glitch::before, .glitch::after { display: none; }
-            .scanlines::before { display: none; }
-        }
-
-        /* Testimonial Card Fix */
-        .testimonial-card {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .testimonial-text {
-            color: #9ca3af;
-            font-size: 0.875rem;
-            font-style: italic;
-            line-height: 1.7;
-        }
-    </style>
 </head>
-<body class="scanlines grid-pattern">
-    <canvas id="matrix" class="matrix-bg"></canvas>
+<body>
+    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+    <div class="bg-layer" aria-hidden="true"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-cyber-black/90 backdrop-blur-md border-b border-cyber-green/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <a href="#hero" class="font-cyber text-cyber-green text-lg sm:text-xl tracking-wider glow-green">
-                    <span class="text-cyber-cyan">&lt;</span>NL<span class="text-cyber-cyan">/&gt;</span>
-                </a>
-                
-                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
-                    <a href="#about" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Sobre</a>
-                    <a href="#skills" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Skills</a>
-                    <a href="#experience" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Experiência</a>
-                    <a href="projects.html" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Projetos</a>
-                    <a href="blog.html" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Blog</a>
-                    <a href="#contact" class="nav-link text-gray-300 hover:text-cyber-green text-sm tracking-wide">Contato</a>
-                </div>
+    <header class="nav" data-nav>
+        <div class="container nav__inner">
+            <a href="#hero" class="brand" aria-label="Natanael Lima — início">
+                <span class="brand__mark">NL<span>_</span></span>
+                <span class="brand__text"><b>natanael</b>@security</span>
+            </a>
 
-                <button id="menuBtn" class="md:hidden text-cyber-green p-2">
-                    <ion-icon name="menu-outline" class="text-2xl"></ion-icon>
-                </button>
-            </div>
+            <nav class="nav__links" aria-label="Principal">
+                <a href="#hero" class="nav__link" data-section-link="hero">Home</a>
+                <a href="#about" class="nav__link" data-section-link="about">Sobre</a>
+                <a href="#skills" class="nav__link" data-section-link="skills">Skills</a>
+                <a href="#experience" class="nav__link" data-section-link="experience">Experiência</a>
+                <a href="#projects" class="nav__link" data-section-link="projects">Projetos</a>
+                <a href="blog.html" class="nav__link">Blog</a>
+                <a href="#contact" class="nav__link" data-section-link="contact">Contato</a>
+                <a href="https://github.com/ademakin3051" target="_blank" rel="noopener" class="btn btn--ghost btn--sm nav__cta">
+                    <ion-icon name="logo-github" aria-hidden="true"></ion-icon> GitHub
+                </a>
+            </nav>
+
+            <button class="nav__toggle" type="button" data-nav-toggle aria-controls="mobileMenu" aria-expanded="false" aria-label="Abrir menu">
+                <span class="nav__toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+            </button>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-cyber-dark border-t border-cyber-green/20">
-            <div class="px-4 py-4 space-y-3">
-                <a href="#about" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Sobre</a>
-                <a href="#skills" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Skills</a>
-                <a href="#experience" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Experiência</a>
-                <a href="projects.html" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Projetos</a>
-                <a href="blog.html" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Blog</a>
-                <a href="#contact" class="block text-gray-300 hover:text-cyber-green text-sm py-2">Contato</a>
+        <nav id="mobileMenu" class="mobile-menu" aria-label="Menu móvel">
+            <a href="#hero" class="mobile-menu__link" data-section-link="hero"><span class="idx">00</span>Home</a>
+            <a href="#about" class="mobile-menu__link" data-section-link="about"><span class="idx">01</span>Sobre</a>
+            <a href="#skills" class="mobile-menu__link" data-section-link="skills"><span class="idx">02</span>Skills</a>
+            <a href="#experience" class="mobile-menu__link" data-section-link="experience"><span class="idx">03</span>Experiência</a>
+            <a href="#projects" class="mobile-menu__link" data-section-link="projects"><span class="idx">04</span>Projetos</a>
+            <a href="blog.html" class="mobile-menu__link"><span class="idx">05</span>Blog</a>
+            <a href="#contact" class="mobile-menu__link" data-section-link="contact"><span class="idx">06</span>Contato</a>
+            <div class="mobile-menu__foot">
+                <a href="https://github.com/ademakin3051" target="_blank" rel="noopener" class="btn btn--ghost btn--block"><ion-icon name="logo-github" aria-hidden="true"></ion-icon> GitHub</a>
+                <a href="https://drive.google.com/file/d/1lg2fYg4_A2yYg5QsX-86DCXbS38xX-Ok/view" target="_blank" rel="noopener" class="btn btn--primary btn--block"><ion-icon name="document-text-outline" aria-hidden="true"></ion-icon> Currículo</a>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-16">
-        <div class="absolute inset-0 bg-gradient-to-b from-cyber-black via-cyber-dark to-cyber-black opacity-90"></div>
-        
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-1/4 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-cyber-green/5 rounded-full blur-3xl animate-pulse"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-cyber-cyan/5 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
-        </div>
+    <main id="main">
+        <!-- Hero -->
+        <section id="hero" class="hero" aria-labelledby="hero-title">
+            <div class="container hero__grid">
+                <div class="hero__content">
+                    <p class="hero__status reveal">
+                        <span class="dot dot--live" aria-hidden="true"></span>
+                        Disponível <span class="sep">/</span> <span class="loc">Red Team Specialist</span>
+                    </p>
 
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <!-- Avatar -->
-            <div class="mb-6 sm:mb-8 relative inline-block">
-                <div class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-2 border-cyber-green p-1 box-glow mx-auto" style="animation: pulseGreen 3s ease-in-out infinite;">
-                    <img src="./img/my-avatar.png" alt="Natanael Lima - Red Team Specialist" class="w-full h-full rounded-full object-contain">
+                    <h1 id="hero-title" class="hero__name reveal" style="--d:80ms">
+                        Natanael <span class="last">Lima</span>
+                    </h1>
+
+                    <p class="hero__role reveal" style="--d:160ms">
+                        <span class="area">Cyber Security &amp; Automação</span>
+                        <span class="sep" aria-hidden="true">&gt;</span>
+                        <span class="hero__typing"><span id="typingText" data-phrases="Hardware Support|Penetration Tester|Ethical Hacker|System Support|RPA Developer">Penetration Tester</span><span class="caret" aria-hidden="true"></span></span>
+                    </p>
+
+                    <p class="hero__tagline reveal" style="--d:240ms">
+                        <strong>Identifico brechas críticas e ajudo a construir antes que se tornem ameaças reais.</strong>
+                        Especialista em Cybersecurity, Red Team, Penetration Testing e Automação de Processos.
+                    </p>
+
+                    <div class="hero__actions reveal" style="--d:320ms">
+                        <a href="#projects" class="btn btn--primary">
+                            <ion-icon name="layers-outline" aria-hidden="true"></ion-icon> Ver projetos
+                        </a>
+                        <a href="#contact" class="btn btn--ghost">
+                            <ion-icon name="chatbubbles-outline" aria-hidden="true"></ion-icon> Vamos Conversar
+                        </a>
+                    </div>
+
+                    <div class="hero__links reveal" style="--d:400ms">
+                        <a href="https://github.com/ademakin3051" target="_blank" rel="noopener"><ion-icon name="logo-github" aria-hidden="true"></ion-icon>github.com/ademakin3051</a>
+                        <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" rel="noopener"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon>LinkedIn</a>
+                        <a href="https://drive.google.com/file/d/1lg2fYg4_A2yYg5QsX-86DCXbS38xX-Ok/view" target="_blank" rel="noopener"><ion-icon name="document-text-outline" aria-hidden="true"></ion-icon>Currículo</a>
+                    </div>
                 </div>
-                <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-cyber-green text-cyber-black px-3 py-1 text-xs font-bold rounded-full whitespace-nowrap">
-                    DISPONÍVEL
-                </div>
-            </div>
 
-            <!-- Name -->
-            <h1 class="font-cyber text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 glitch" data-text="NATANAEL LIMA">
-                NATANAEL LIMA
-            </h1>
-
-            <!-- Typing Effect -->
-            <div class="h-6 sm:h-8 md:h-10 mb-6 sm:mb-8 overflow-hidden">
-                <p class="font-mono text-cyber-green text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider">
-                    <span class="text-cyber-cyan">&gt;</span> <span id="typingText"></span><span class="animate-pulse">_</span>
-                </p>
-            </div>
-
-            <!-- Professional Tagline -->
-            <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
-                <span class="text-cyber-yellow" >Identifico brechas críticas e ajudo a construir antes que se tornem ameaças reais.</span> 
-            </p>
-
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                <a href="#contact" class="w-full sm:w-auto px-8 py-3 bg-cyber-green text-cyber-black font-bold rounded transition-all hover:bg-cyber-green/90 hover:scale-105 flex items-center justify-center gap-2">
-                    <ion-icon name="chatbubbles-outline"></ion-icon>
-                    Vamos Conversar
-                </a>
-                <a href="https://drive.google.com/file/d/1lg2fYg4_A2yYg5QsX-86DCXbS38xX-Ok/view" target="_blank" class="w-full sm:w-auto px-8 py-3 border border-cyber-green text-cyber-green font-bold rounded transition-all hover:bg-cyber-green/10 hover:scale-105 flex items-center justify-center gap-2">
-                    <ion-icon name="document-text-outline"></ion-icon>
-                    Currículo
-                </a>
-            </div>
-
-            <!-- Quick Stats -->
-            <div class="grid grid-cols-3 gap-3 sm:gap-4 mt-10 sm:mt-12 max-w-md mx-auto">
-                <div class="cyber-card p-3 sm:p-4 rounded-lg text-center">
-                    <p class="font-cyber text-xl sm:text-2xl text-cyber-green">4+</p>
-                    <p class="text-gray-500 text-xs mt-1">Anos de Experiência</p>
-                </div>
-                <div class="cyber-card p-3 sm:p-4 rounded-lg text-center">
-                    <p class="font-cyber text-xl sm:text-2xl text-cyber-cyan">10+</p>
-                    <p class="text-gray-500 text-xs mt-1">Projetos Entregues</p>
-                </div>
-                <div class="cyber-card p-3 sm:p-4 rounded-lg text-center">
-                    <p class="font-cyber text-xl sm:text-2xl text-cyber-red">16+</p>
-                    <p class="text-gray-500 text-xs mt-1">Certificados</p>
-                </div>
-            </div>
-
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block">
-                <a href="#about" class="text-cyber-green">
-                    <ion-icon name="chevron-down-outline" class="text-3xl"></ion-icon>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 sm:py-20 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="reveal">
-                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center gap-4">
-                    <span class="text-cyber-green">//</span> SOBRE MIM
-                </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-8 sm:mb-12"></div>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-                <!-- Bio -->
-                <div class="reveal">
-                    <div class="terminal mb-6">
-                        <div class="terminal-header">
-                            <span class="terminal-btn bg-cyber-red"></span>
-                            <span class="terminal-btn bg-yellow-500"></span>
-                            <span class="terminal-btn bg-cyber-green"></span>
-                            <span class="text-gray-500 text-xs ml-2 truncate">whoami.sh</span>
+                <div class="hero__side reveal" style="--d:200ms">
+                    <div class="terminal hero-terminal scan">
+                        <div class="terminal__bar">
+                            <span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="terminal__title">natanael@security: ~</span>
+                            <span class="terminal__meta"><span class="dot dot--live" aria-hidden="true"></span>LIVE</span>
                         </div>
-                        <div class="p-4 sm:p-6">
-                            <p class="text-cyber-green mb-3 text-sm">$ whoami</p>
-                            <p class="text-gray-300 leading-relaxed mb-4 text-sm sm:text-base">
-                                Sou <span class="text-cyber-green font-bold">Natanael Evangelista</span>, 
-                                formado em <span class="text-cyber-cyan">Cybersecurity</span> e 
-                                <span class="text-cyber-cyan">Automação de Processos</span>.
+                        <div class="terminal__body" data-terminal>
+                            <p class="line"><span class="t-prompt">natanael@security</span><span class="t-dim">:</span><span class="t-path">~</span><span class="t-dim">$</span> <span class="cmd t-out">whoami</span></p>
+                            <p class="line">&nbsp;</p>
+                            <p class="line t-out">Natanael Lima</p>
+                            <p class="line"><span class="t-ok">▸</span> Cyber Security</p>
+                            <p class="line"><span class="t-ok">▸</span> Automation</p>
+                            <p class="line"><span class="t-ok">▸</span> Technology</p>
+                            <p class="line">&nbsp;</p>
+                            <p class="line"><span class="t-prompt">natanael@security</span><span class="t-dim">:</span><span class="t-path">~</span><span class="t-dim">$</span> <span class="cmd t-out">./status --check</span></p>
+                            <p class="line"><span class="t-ok">[ OK ]</span> <span class="t-key">status:</span> DISPONÍVEL</p>
+                            <p class="line"><span class="t-prompt">natanael@security</span><span class="t-dim">:</span><span class="t-path">~</span><span class="t-dim">$</span> <span class="caret" aria-hidden="true"></span></p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="stats" role="list">
+                        <div class="stat" role="listitem">
+                            <p class="stat__value">4<em>+</em></p>
+                            <p class="stat__label">Anos de Experiência</p>
+                        </div>
+                        <div class="stat" role="listitem">
+                            <p class="stat__value">10<em>+</em></p>
+                            <p class="stat__label">Projetos Entregues</p>
+                        </div>
+                        <div class="stat" role="listitem">
+                            <p class="stat__value">16<em>+</em></p>
+                            <p class="stat__label">Certificados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#about" class="scroll-hint" aria-label="Rolar para a seção Sobre">
+                scroll <span class="scroll-hint__line" aria-hidden="true"></span>
+            </a>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="section" aria-labelledby="about-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span class="idx">01</span> About</p>
+                    <h2 id="about-title" class="section-title">Sobre mim</h2>
+                </header>
+
+                <div class="about__grid">
+                    <!-- Profile -->
+                    <article class="panel profile corners reveal" aria-label="Perfil técnico">
+                        <div class="profile__head">
+                            <div class="profile__avatar">
+                                <img src="./img/my-avatar.png" alt="Natanael Lima - Red Team Specialist" width="433" height="577" loading="lazy">
+                            </div>
+                            <div>
+                                <h3 class="profile__name">Natanael Lima</h3>
+                                <p class="profile__handle">$ whoami</p>
+                                <p class="profile__badge"><span class="status"><span class="dot dot--live" aria-hidden="true"></span>Disponível</span></p>
+                            </div>
+                        </div>
+                        <dl class="kv">
+                            <div class="kv__row"><dt>Name</dt><dd>Natanael Evangelista</dd></div>
+                            <div class="kv__row"><dt>Focus</dt><dd>Cybersecurity &amp; Automação de Processos</dd></div>
+                            <div class="kv__row"><dt>Experience</dt><dd>4+ anos <small>Automação, suporte CSC, Active Directory e segurança</small></dd></div>
+                            <div class="kv__row"><dt>Specialization</dt><dd>Red Team &amp; Penetration Testing</dd></div>
+                            <div class="kv__row"><dt>Current studies</dt><dd>Graduação em Cybersecurity <small>Universidade Uninter · 2025 – Atual</small></dd></div>
+                        </dl>
+                    </article>
+
+                    <div>
+                        <!-- Bio -->
+                        <article class="panel bio reveal" style="--d:80ms">
+                            <p class="bio__cmd"><span>$</span> cat about.md</p>
+                            <p>
+                                Sou <strong>Natanael Evangelista</strong>, formado em <span class="hl-2">Cybersecurity</span>
+                                e <span class="hl-2">Automação de Processos</span>.
                             </p>
-                            <p class="text-gray-400 leading-relaxed mb-4 text-sm sm:text-base">
-                                Atuo com empresas para fortalecer suas infraestruturas tecnológicas, 
+                            <p>
+                                Atuo com empresas para fortalecer suas infraestruturas tecnológicas,
                                 identificando vulnerabilidades e implementando soluções de segurança robustas.
                             </p>
-                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
-                                Minha missão é <span class="text-cyber-green">proteger ativos digitais</span> e 
-                                <span class="text-cyber-cyan">otimizar processos</span>, sempre com foco em resultados mensuráveis.
+                            <p>
+                                Minha missão é <span class="hl">proteger ativos digitais</span> e
+                                <span class="hl-2">otimizar processos</span>, sempre com foco em resultados mensuráveis.
                             </p>
-                            <p class="text-cyber-green mt-4 animate-pulse text-sm">$ _</p>
-                        </div>
-                    </div>
-                </div>
+                        </article>
 
-                <!-- Services -->
-                <div class="reveal">
-                    <h3 class="text-white font-bold text-lg mb-6 flex items-center gap-2">
-                        <ion-icon name="shield-checkmark-outline" class="text-cyber-green"></ion-icon>
-                        Áreas de Atuação
-                    </h3>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="cyber-card p-5 rounded-lg group">
-                            <div class="w-12 h-12 bg-cyber-green/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyber-green/20 transition-colors">
-                                <ion-icon name="skull-outline" class="text-cyber-green text-2xl"></ion-icon>
-                            </div>
-                            <h4 class="text-white font-bold mb-2">Ethical Hacking</h4>
-                            <p class="text-gray-500 text-sm">Red Team & Penetration Testing</p>
-                        </div>
-
-                        <div class="cyber-card p-5 rounded-lg group">
-                            <div class="w-12 h-12 bg-cyber-cyan/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyber-cyan/20 transition-colors">
-                                <ion-icon name="cog-outline" class="text-cyber-cyan text-2xl"></ion-icon>
-                            </div>
-                            <h4 class="text-white font-bold mb-2">RPA</h4>
-                            <p class="text-gray-500 text-sm">Automação com Python & N8N</p>
-                        </div>
-
-                        <div class="cyber-card p-5 rounded-lg group">
-                            <div class="w-12 h-12 bg-cyber-purple/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyber-purple/20 transition-colors">
-                                <ion-icon name="headset-outline" class="text-cyber-purple text-2xl"></ion-icon>
-                            </div>
-                            <h4 class="text-white font-bold mb-2">Suporte Técnico</h4>
-                            <p class="text-gray-500 text-sm">Help Desk N1 & N2</p>
-                        </div>
-
-                        <div class="cyber-card p-5 rounded-lg group">
-                            <div class="w-12 h-12 bg-cyber-red/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyber-red/20 transition-colors">
-                                <ion-icon name="hardware-chip-outline" class="text-cyber-red text-2xl"></ion-icon>
-                            </div>
-                            <h4 class="text-white font-bold mb-2">Hardware</h4>
-                            <p class="text-gray-500 text-sm">Manutenção Avançada</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-16 sm:py-20 bg-cyber-dark/50 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="reveal">
-                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center gap-4">
-                    <span class="text-cyber-green">//</span> SKILLS
-                </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-8 sm:mb-12"></div>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Technical Skills -->
-                <div class="reveal">
-                    <div class="terminal">
-                        <div class="terminal-header">
-                            <span class="terminal-btn bg-cyber-red"></span>
-                            <span class="terminal-btn bg-yellow-500"></span>
-                            <span class="terminal-btn bg-cyber-green"></span>
-                            <span class="text-gray-500 text-xs ml-2 truncate">skills.json</span>
-                        </div>
-                        <div class="p-4 sm:p-6 space-y-5">
-                            <div>
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-cyber-green text-sm">Cyber Security</span>
-                                    <span class="text-gray-500 text-sm">80%</span>
+                        <!-- Areas -->
+                        <div class="areas">
+                            <h3 class="sub-title reveal"><ion-icon name="shield-checkmark-outline" aria-hidden="true"></ion-icon>Áreas de Atuação</h3>
+                            <div class="grid grid-2">
+                                <div class="panel panel--hover area-card reveal">
+                                    <span class="icon-box"><ion-icon name="shield-half-outline" aria-hidden="true"></ion-icon></span>
+                                    <div><h4>Ethical Hacking</h4><p>Red Team &amp; Penetration Testing</p></div>
                                 </div>
-                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%;"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-cyber-cyan text-sm">RPA / Automação</span>
-                                    <span class="text-gray-500 text-sm">70%</span>
+                                <div class="panel panel--hover area-card reveal" style="--d:60ms">
+                                    <span class="icon-box icon-box--cyan"><ion-icon name="cog-outline" aria-hidden="true"></ion-icon></span>
+                                    <div><h4>RPA</h4><p>Automação com Python &amp; N8N</p></div>
                                 </div>
-                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 70%;"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-cyber-purple text-sm">Computer Repair</span>
-                                    <span class="text-gray-500 text-sm">90%</span>
+                                <div class="panel panel--hover area-card reveal" style="--d:120ms">
+                                    <span class="icon-box icon-box--cyan"><ion-icon name="headset-outline" aria-hidden="true"></ion-icon></span>
+                                    <div><h4>Suporte Técnico</h4><p>Help Desk N1 &amp; N2</p></div>
                                 </div>
-                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-cyber-red text-sm">Python</span>
-                                    <span class="text-gray-500 text-sm">50%</span>
+                                <div class="panel panel--hover area-card reveal" style="--d:180ms">
+                                    <span class="icon-box"><ion-icon name="hardware-chip-outline" aria-hidden="true"></ion-icon></span>
+                                    <div><h4>Hardware</h4><p>Manutenção Avançada</p></div>
                                 </div>
-                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 50%;"></div></div>
                             </div>
-                            <div>
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-white text-sm">Networking</span>
-                                    <span class="text-gray-500 text-sm">75%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section section--alt" aria-labelledby="skills-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span class="idx">02</span> Skills</p>
+                    <h2 id="skills-title" class="section-title">Stack &amp; competências</h2>
+                    <p class="section-lead">Ferramentas &amp; Tecnologias organizadas por domínio — segurança ofensiva, automação e infraestrutura.</p>
+                </header>
+
+                <div class="skills__grid">
+                    <article class="panel panel--hover skill-card reveal">
+                        <div class="skill-card__head">
+                            <span class="icon-box"><ion-icon name="shield-half-outline" aria-hidden="true"></ion-icon></span>
+                            <div><p class="skill-card__code">SEC / 01</p><h3 class="skill-card__title">Cyber Security</h3></div>
+                        </div>
+                        <p class="skill-card__desc">Red Team &amp; Penetration Testing: identificar brechas críticas antes que se tornem ameaças reais.</p>
+                        <ul class="tag-list">
+                            <li class="tag tag--green">Ethical Hacking</li>
+                            <li class="tag tag--green">Penetration Testing</li>
+                            <li class="tag tag--green">Red Team</li>
+                            <li class="tag tag--green">Recon / OSINT</li>
+                        </ul>
+                    </article>
+
+                    <article class="panel panel--hover skill-card reveal" style="--d:60ms">
+                        <div class="skill-card__head">
+                            <span class="icon-box icon-box--cyan"><ion-icon name="git-network-outline" aria-hidden="true"></ion-icon></span>
+                            <div><p class="skill-card__code">AUT / 02</p><h3 class="skill-card__title">Automation</h3></div>
+                        </div>
+                        <p class="skill-card__desc">RPA e automação de workflows com Python e N8N, integrando APIs e IA.</p>
+                        <ul class="tag-list">
+                            <li class="tag tag--cyan">Python</li>
+                            <li class="tag tag--cyan">N8N</li>
+                            <li class="tag tag--cyan">RPA</li>
+                            <li class="tag tag--cyan">APIs &amp; Webhooks</li>
+                            <li class="tag tag--cyan">OpenAI</li>
+                        </ul>
+                    </article>
+
+                    <article class="panel panel--hover skill-card reveal">
+                        <div class="skill-card__head">
+                            <span class="icon-box icon-box--cyan"><ion-icon name="server-outline" aria-hidden="true"></ion-icon></span>
+                            <div><p class="skill-card__code">INF / 03</p><h3 class="skill-card__title">Infrastructure</h3></div>
+                        </div>
+                        <p class="skill-card__desc">Redes, Active Directory, suporte técnico e manutenção avançada de hardware.</p>
+                        <ul class="tag-list">
+                            <li class="tag">Networking</li>
+                            <li class="tag">Active Directory</li>
+                            <li class="tag">Help Desk N1 &amp; N2</li>
+                            <li class="tag">Hardware</li>
+                            <li class="tag">GLPI</li>
+                            <li class="tag">Moodle</li>
+                        </ul>
+                    </article>
+
+                    <article class="panel panel--hover skill-card reveal" style="--d:60ms">
+                        <div class="skill-card__head">
+                            <span class="icon-box"><ion-icon name="construct-outline" aria-hidden="true"></ion-icon></span>
+                            <div><p class="skill-card__code">TLS / 04</p><h3 class="skill-card__title">Tools</h3></div>
+                        </div>
+                        <p class="skill-card__desc">Ferramentas usadas no dia a dia de testes, análise e desenvolvimento.</p>
+                        <ul class="tag-list">
+                            <li class="tag">Kali Linux</li>
+                            <li class="tag">Metasploit</li>
+                            <li class="tag">Burp Suite</li>
+                            <li class="tag">Nmap</li>
+                            <li class="tag">Wireshark</li>
+                            <li class="tag">SQLMap</li>
+                            <li class="tag">Git</li>
+                            <li class="tag">Docker</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Core domains: qualitative indicators -->
+                <div class="panel domains reveal" aria-label="Domínios principais">
+                    <div class="domain">
+                        <span class="domain__name">Cyber Security</span>
+                        <span class="domain__level">Avançado <span class="signal" data-level="3" aria-hidden="true"><i></i><i></i><i></i></span></span>
+                    </div>
+                    <div class="domain">
+                        <span class="domain__name">RPA / Automação</span>
+                        <span class="domain__level">Sólido <span class="signal" data-level="2" aria-hidden="true"><i></i><i></i><i></i></span></span>
+                    </div>
+                    <div class="domain">
+                        <span class="domain__name">Computer Repair</span>
+                        <span class="domain__level">Avançado <span class="signal" data-level="3" aria-hidden="true"><i></i><i></i><i></i></span></span>
+                    </div>
+                    <div class="domain">
+                        <span class="domain__name">Python</span>
+                        <span class="domain__level">Em evolução <span class="signal" data-level="1" aria-hidden="true"><i></i><i></i><i></i></span></span>
+                    </div>
+                    <div class="domain">
+                        <span class="domain__name">Networking</span>
+                        <span class="domain__level">Sólido <span class="signal" data-level="2" aria-hidden="true"><i></i><i></i><i></i></span></span>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="section--tight" style="padding-bottom:0">
+                    <h3 class="sub-title reveal"><ion-icon name="ribbon-outline" aria-hidden="true"></ion-icon>Certificações</h3>
+                    <div class="certs">
+                        <a href="https://www.udemy.com/certificate/UC-26ec2d8b-86dd-4f1c-9417-3102b5f21b7a/" target="_blank" rel="noopener" class="panel panel--hover cert reveal" title="Ethical Hacking">
+                            <img src="./img/logo-1.png" alt="Udemy" width="48" height="48" loading="lazy">
+                            <span><span class="cert__name">Ethical Hacking</span><br><span class="cert__issuer">Udemy</span></span>
+                            <ion-icon name="open-outline" class="cert__go" aria-hidden="true"></ion-icon>
+                        </a>
+                        <a href="https://desecsecurity.com/valida-certificado/LIJJ-QVKIR-SFUQ" target="_blank" rel="noopener" class="panel panel--hover cert reveal" style="--d:50ms" title="Pentest Profissional">
+                            <img src="./img/logo-2.png" alt="Desec" width="48" height="48" loading="lazy">
+                            <span><span class="cert__name">Pentest Profissional</span><br><span class="cert__issuer">Desec Security</span></span>
+                            <ion-icon name="open-outline" class="cert__go" aria-hidden="true"></ion-icon>
+                        </a>
+                        <a href="https://www.linkedin.com/learning/certificates/5a86355f50f3663fcb7aa8a48376c1d0caf460ae9632edbb9fa58a93d5b31c6b" target="_blank" rel="noopener" class="panel panel--hover cert reveal" style="--d:100ms" title="Cybersecurity">
+                            <img src="./img/logo-3.png" alt="LinkedIn" width="48" height="48" loading="lazy">
+                            <span><span class="cert__name">Cybersecurity</span><br><span class="cert__issuer">LinkedIn Learning</span></span>
+                            <ion-icon name="open-outline" class="cert__go" aria-hidden="true"></ion-icon>
+                        </a>
+                        <a href="https://www.linkedin.com/learning/certificates/0dbd5d505aa8e0c468e11af12f145dfb0e1c47f28f5ca8c3efc71a8c6f935ca0" target="_blank" rel="noopener" class="panel panel--hover cert reveal" title="LGPD">
+                            <img src="./img/logo-4.png" alt="LinkedIn" width="48" height="48" loading="lazy">
+                            <span><span class="cert__name">LGPD</span><br><span class="cert__issuer">LinkedIn Learning</span></span>
+                            <ion-icon name="open-outline" class="cert__go" aria-hidden="true"></ion-icon>
+                        </a>
+                        <a href="https://www.conquerplus.com.br/certificates/831c5500-523f-4704-9b66-84f8b34e093d?enrollment" target="_blank" rel="noopener" class="panel panel--hover cert reveal" style="--d:50ms" title="Power BI">
+                            <img src="./img/logo-5.png" alt="Conquer" width="48" height="48" loading="lazy">
+                            <span><span class="cert__name">Power BI</span><br><span class="cert__issuer">Conquer</span></span>
+                            <ion-icon name="open-outline" class="cert__go" aria-hidden="true"></ion-icon>
+                        </a>
+                        <a href="https://drive.google.com/file/d/1TB1oBiUGR-0H-Q0NRWL40U59t6-S4_BA/view" target="_blank" rel="noopener" class="panel panel--hover cert reveal" style="--d:100ms" title="Metasploit">
+                            <img src="./img/logo-6.png" alt="Hackers Hive" width="48" height="48" loading="lazy">
+                            <span><span class="cert__name">Metasploit</span><br><span class="cert__issuer">Hackers Hive</span></span>
+                            <ion-icon name="open-outline" class="cert__go" aria-hidden="true"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="section" aria-labelledby="experience-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span class="idx">03</span> Experience</p>
+                    <h2 id="experience-title" class="section-title">Experiência</h2>
+                </header>
+
+                <div class="grid grid-2" style="gap:40px">
+                    <!-- Work -->
+                    <div>
+                        <h3 class="sub-title reveal"><ion-icon name="briefcase-outline" aria-hidden="true"></ion-icon>Profissional</h3>
+                        <ol class="timeline">
+                            <li class="panel panel--hover timeline__item reveal">
+                                <div class="timeline__head">
+                                    <h4 class="timeline__title">Acamef/Academia do Bancário</h4>
+                                    <span class="timeline__date">2023 - 2024</span>
                                 </div>
-                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 75%;"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tools -->
-                <div class="reveal">
-                    <h3 class="text-white font-bold text-lg mb-6 flex items-center gap-2">
-                        <ion-icon name="construct-outline" class="text-cyber-green"></ion-icon>
-                        Ferramentas & Tecnologias
-                    </h3>
-                    <div class="flex flex-wrap gap-2 sm:gap-3">
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-green/30 rounded text-xs sm:text-sm text-cyber-green hover:bg-cyber-green/10 transition-colors">Kali Linux</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-cyan/30 rounded text-xs sm:text-sm text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors">Metasploit</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-purple/30 rounded text-xs sm:text-sm text-cyber-purple hover:bg-cyber-purple/10 transition-colors">Burp Suite</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-red/30 rounded text-xs sm:text-sm text-cyber-red hover:bg-cyber-red/10 transition-colors">Nmap</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-green/30 rounded text-xs sm:text-sm text-cyber-green hover:bg-cyber-green/10 transition-colors">Python</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-cyan/30 rounded text-xs sm:text-sm text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors">N8N</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-purple/30 rounded text-xs sm:text-sm text-cyber-purple hover:bg-cyber-purple/10 transition-colors">GLPI</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-red/30 rounded text-xs sm:text-sm text-cyber-red hover:bg-cyber-red/10 transition-colors">Wireshark</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-green/30 rounded text-xs sm:text-sm text-cyber-green hover:bg-cyber-green/10 transition-colors">Git</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-cyan/30 rounded text-xs sm:text-sm text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors">Docker</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-white/30 rounded text-xs sm:text-sm text-white hover:bg-white/10 transition-colors">Active Directory</span>
-                        <span class="px-3 py-2 bg-cyber-gray border border-cyber-green/30 rounded text-xs sm:text-sm text-cyber-green hover:bg-cyber-green/10 transition-colors">SQLMap</span>
+                                <p class="timeline__desc">Automação de workflows e gestão da plataforma Moodle</p>
+                            </li>
+                            <li class="panel panel--hover timeline__item reveal">
+                                <div class="timeline__head">
+                                    <h4 class="timeline__title">Blend IT Consultoria</h4>
+                                    <span class="timeline__date">2022 - 2023</span>
+                                </div>
+                                <p class="timeline__desc">Suporte CSC, Active Directory e segurança</p>
+                            </li>
+                            <li class="panel panel--hover timeline__item reveal">
+                                <div class="timeline__head">
+                                    <h4 class="timeline__title">Sete Ambiental Logística</h4>
+                                    <span class="timeline__date">2021 - 2022</span>
+                                </div>
+                                <p class="timeline__desc">Manutenção avançada e monitoramento de segurança</p>
+                            </li>
+                        </ol>
                     </div>
 
-                    <!-- Certifications -->
-                    <h3 class="text-white font-bold text-lg mt-8 mb-6 flex items-center gap-2">
-                        <ion-icon name="ribbon-outline" class="text-cyber-cyan"></ion-icon>
-                        Certificações
-                    </h3>
-                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
-                        <a href="https://www.udemy.com/certificate/UC-26ec2d8b-86dd-4f1c-9417-3102b5f21b7a/" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Ethical Hacking">
-                            <img src="./img/logo-1.png" alt="Udemy" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
-                        </a>
-                        <a href="https://desecsecurity.com/valida-certificado/LIJJ-QVKIR-SFUQ" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Pentest Profissional">
-                            <img src="./img/logo-2.png" alt="Desec" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
-                        </a>
-                        <a href="https://www.linkedin.com/learning/certificates/5a86355f50f3663fcb7aa8a48376c1d0caf460ae9632edbb9fa58a93d5b31c6b" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Cybersecurity">
-                            <img src="./img/logo-3.png" alt="LinkedIn" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
-                        </a>
-                        <a href="https://www.linkedin.com/learning/certificates/0dbd5d505aa8e0c468e11af12f145dfb0e1c47f28f5ca8c3efc71a8c6f935ca0" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="LGPD">
-                            <img src="./img/logo-4.png" alt="LinkedIn" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
-                        </a>
-                        <a href="https://www.conquerplus.com.br/certificates/831c5500-523f-4704-9b66-84f8b34e093d?enrollment" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Power BI">
-                            <img src="./img/logo-5.png" alt="Conquer" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
-                        </a>
-                        <a href="https://drive.google.com/file/d/1TB1oBiUGR-0H-Q0NRWL40U59t6-S4_BA/view" target="_blank" class="cyber-card p-3 rounded-lg flex items-center justify-center aspect-square group" title="Metasploit">
-                            <img src="./img/logo-6.png" alt="Hackers Hive" class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all">
-                        </a>
+                    <!-- Education -->
+                    <div>
+                        <h3 class="sub-title reveal"><ion-icon name="school-outline" aria-hidden="true"></ion-icon>Formação</h3>
+                        <ol class="timeline">
+                            <li class="panel panel--hover timeline__item timeline__item--current reveal">
+                                <div class="timeline__head">
+                                    <h4 class="timeline__title">Universidade Uninter</h4>
+                                    <span class="timeline__date">2025 - Atual</span>
+                                </div>
+                                <p class="timeline__desc">Graduação em Cybersecurity</p>
+                            </li>
+                            <li class="panel panel--hover timeline__item reveal">
+                                <div class="timeline__head">
+                                    <h4 class="timeline__title">Desec Security</h4>
+                                    <span class="timeline__date">2024 - 2025</span>
+                                </div>
+                                <p class="timeline__desc">Pentesting &amp; Red Team Operations</p>
+                            </li>
+                            <li class="panel panel--hover timeline__item reveal">
+                                <div class="timeline__head">
+                                    <h4 class="timeline__title">Elaborata Informática</h4>
+                                    <span class="timeline__date">2020 - 2021</span>
+                                </div>
+                                <p class="timeline__desc">Manutenção Avançada de Hardware</p>
+                            </li>
+                        </ol>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-16 sm:py-20 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="reveal">
-                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center gap-4">
-                    <span class="text-cyber-green">//</span> EXPERIÊNCIA
-                </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-8 sm:mb-12"></div>
-            </div>
+        <!-- Projects preview -->
+        <section id="projects" class="section section--alt" aria-labelledby="projects-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span class="idx">04</span> Projects</p>
+                    <h2 id="projects-title" class="section-title">Projetos</h2>
+                    <p class="section-lead">Soluções desenvolvidas com foco em segurança, automação e inovação. Cada projeto tem um case study técnico completo.</p>
+                </header>
 
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Work -->
-                <div class="reveal">
-                    <h3 class="text-cyber-green font-mono text-base sm:text-lg mb-6 flex items-center gap-2">
-                        <ion-icon name="briefcase-outline"></ion-icon> Profissional
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-green">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
-                                <h4 class="text-white font-bold text-sm sm:text-base">Acamef/Academia do Bancário</h4>
-                                <span class="text-cyber-green text-xs sm:text-sm">2023 - 2024</span>
+                <div class="grid grid-3">
+                    <article class="panel panel--hover pcard reveal">
+                        <div class="pcard__media">
+                            <img src="./img/projeto1.png" alt="Chatbot GLPI" width="708" height="424" loading="lazy">
+                            <span class="status"><span class="dot" aria-hidden="true"></span>Completo</span>
+                        </div>
+                        <div class="pcard__body">
+                            <p class="pcard__id"><span>PROJECT / 001</span><span>RPA + AI</span></p>
+                            <h3 class="pcard__title">Chatbot GLPI</h3>
+                            <p class="pcard__desc">Chatbot de suporte inteligente com N8N, GLPI e OpenAI</p>
+                            <ul class="tag-list"><li class="tag">N8N</li><li class="tag">GLPI</li><li class="tag">OpenAI</li><li class="tag">WhatsApp</li></ul>
+                            <div class="pcard__actions">
+                                <a href="projects.html#botglpi" class="btn btn--ghost btn--sm">Case study</a>
+                                <a href="https://github.com/ademakin3051/botglpi" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" aria-label="Chatbot GLPI no GitHub"><ion-icon name="logo-github" aria-hidden="true"></ion-icon> GitHub</a>
                             </div>
-                            <p class="text-gray-400 text-xs sm:text-sm">Automação de workflows e gestão da plataforma Moodle</p>
                         </div>
-                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-cyan">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
-                                <h4 class="text-white font-bold text-sm sm:text-base">Blend IT Consultoria</h4>
-                                <span class="text-cyber-cyan text-xs sm:text-sm">2022 - 2023</span>
+                    </article>
+
+                    <article class="panel panel--hover pcard reveal" style="--d:80ms">
+                        <div class="pcard__media">
+                            <img src="./img/projeto2.png" alt="Digitador Automático" width="708" height="424" loading="lazy">
+                            <span class="status"><span class="dot" aria-hidden="true"></span>Completo</span>
+                        </div>
+                        <div class="pcard__body">
+                            <p class="pcard__id"><span>PROJECT / 002</span><span>Automação</span></p>
+                            <h3 class="pcard__title">Digitador Automático</h3>
+                            <p class="pcard__desc">Aplicação Python para automatização de digitação</p>
+                            <ul class="tag-list"><li class="tag">Python</li><li class="tag">Tkinter</li><li class="tag">Pynput</li></ul>
+                            <div class="pcard__actions">
+                                <a href="projects.html#digitador" class="btn btn--ghost btn--sm">Case study</a>
+                                <a href="https://github.com/ademakin3051/digitador-automatico" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" aria-label="Digitador Automático no GitHub"><ion-icon name="logo-github" aria-hidden="true"></ion-icon> GitHub</a>
                             </div>
-                            <p class="text-gray-400 text-xs sm:text-sm">Suporte CSC, Active Directory e segurança</p>
                         </div>
-                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-purple">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
-                                <h4 class="text-white font-bold text-sm sm:text-base">Sete Ambiental Logística</h4>
-                                <span class="text-cyber-purple text-xs sm:text-sm">2021 - 2022</span>
+                    </article>
+
+                    <article class="panel panel--hover pcard reveal" style="--d:160ms">
+                        <div class="pcard__media">
+                            <img src="./img/projeto3.png" alt="Script GoogleDorks" width="661" height="483" loading="lazy">
+                            <span class="status"><span class="dot" aria-hidden="true"></span>Completo</span>
+                        </div>
+                        <div class="pcard__body">
+                            <p class="pcard__id"><span>PROJECT / 003</span><span>Recon RedTeam</span></p>
+                            <h3 class="pcard__title">Script GoogleDorks</h3>
+                            <p class="pcard__desc">Script automatiza Google Dorks via API para identificar superfícies expostas públicas.</p>
+                            <ul class="tag-list"><li class="tag">Google Dorks</li><li class="tag">API</li><li class="tag">Recon</li></ul>
+                            <div class="pcard__actions">
+                                <a href="projects.html#googledorks" class="btn btn--ghost btn--sm">Case study</a>
+                                <a href="https://github.com/ademakin3051/ferramentagoogledorks" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" aria-label="Script GoogleDorks no GitHub"><ion-icon name="logo-github" aria-hidden="true"></ion-icon> GitHub</a>
                             </div>
-                            <p class="text-gray-400 text-xs sm:text-sm">Manutenção avançada e monitoramento de segurança</p>
                         </div>
-                    </div>
+                    </article>
                 </div>
 
-                <!-- Education -->
-                <div class="reveal">
-                    <h3 class="text-cyber-cyan font-mono text-base sm:text-lg mb-6 flex items-center gap-2">
-                        <ion-icon name="school-outline"></ion-icon> Formação
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-green">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
-                                <h4 class="text-white font-bold text-sm sm:text-base">Universidade Uninter</h4>
-                                <span class="text-cyber-green text-xs sm:text-sm">2025 - Atual</span>
-                            </div>
-                            <p class="text-gray-400 text-xs sm:text-sm">Graduação em Cybersecurity</p>
-                        </div>
-                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-cyan">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
-                                <h4 class="text-white font-bold text-sm sm:text-base">Desec Security</h4>
-                                <span class="text-cyber-cyan text-xs sm:text-sm">2024 - 2025</span>
-                            </div>
-                            <p class="text-gray-400 text-xs sm:text-sm">Pentesting & Red Team Operations</p>
-                        </div>
-                        <div class="cyber-card p-4 sm:p-5 rounded-lg border-l-4 border-l-cyber-purple">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
-                                <h4 class="text-white font-bold text-sm sm:text-base">Elaborata Informática</h4>
-                                <span class="text-cyber-purple text-xs sm:text-sm">2020 - 2021</span>
-                            </div>
-                            <p class="text-gray-400 text-xs sm:text-sm">Manutenção Avançada de Hardware</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-16 sm:py-20 bg-cyber-dark/50 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="reveal">
-                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center gap-4">
-                    <span class="text-cyber-green">//</span> RECOMENDAÇÕES
-                </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-8 sm:mb-12"></div>
-            </div>
-
-            <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 reveal">
-                <div class="cyber-card p-4 sm:p-6 rounded-xl testimonial-card">
-                    <div class="flex items-center gap-3 sm:gap-4 mb-4">
-                        <img src="./img/depoimento1.png" alt="Victor Bufalari" class="w-12 h-12 rounded-full flex-shrink-0 object-cover">
-                        <div class="min-w-0">
-                            <h4 class="text-white font-bold text-sm sm:text-base truncate">Victor Bufalari</h4>
-                            <p class="text-cyber-green text-xs truncate">Coordenador - Grupo Positivo</p>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"Profissional altamente qualificado e ágil, sempre dedicado a prestar suporte em TI. Contribuiu positivamente para o trabalho em equipe."</p>
-                </div>
-
-                <div class="cyber-card p-4 sm:p-6 rounded-xl testimonial-card">
-                    <div class="flex items-center gap-3 sm:gap-4 mb-4">
-                        <img src="./img/depoimento2.png" alt="Elisângela Bassete" class="w-12 h-12 rounded-full flex-shrink-0 object-cover">
-                        <div class="min-w-0">
-                            <h4 class="text-white font-bold text-sm sm:text-base truncate">Elisângela Bassete</h4>
-                            <p class="text-cyber-cyan text-xs truncate">Diretora - Sete Ambiental</p>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"Natan é dedicado, inteligente e profissional. Possui muitas habilidades e grande capacidade de trabalhar em equipe."</p>
-                </div>
-
-                <div class="cyber-card p-4 sm:p-6 rounded-xl testimonial-card">
-                    <div class="flex items-center gap-3 sm:gap-4 mb-4">
-                        <img src="./img/depoimento3.png" alt="Jaqueline Monteiro" class="w-12 h-12 rounded-full flex-shrink-0 object-cover">
-                        <div class="min-w-0">
-                            <h4 class="text-white font-bold text-sm sm:text-base truncate">Jaqueline Monteiro</h4>
-                            <p class="text-cyber-purple text-xs truncate">Representante Comercial</p>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"Profissional de primeira. Habilidades incríveis, resolve situações desafiadoras e executa seu trabalho com maestria."</p>
-                </div>
-
-                <div class="cyber-card p-4 sm:p-6 rounded-xl testimonial-card">
-                    <div class="flex items-center gap-3 sm:gap-4 mb-4">
-                        <img src="./img/depoimentos4.png" alt="Michael Douglas" class="w-12 h-12 rounded-full flex-shrink-0 object-cover">
-                        <div class="min-w-0">
-                            <h4 class="text-white font-bold text-sm sm:text-base truncate">Michael Douglas</h4>
-                            <p class="text-cyber-red text-xs truncate">Assistente de Produto</p>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"Fortes habilidades técnicas e excelente visão em tecnologia. Destaco sua empatia e excelentes habilidades de comunicação."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 sm:py-20 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="reveal text-center">
-                <h2 class="font-cyber text-2xl sm:text-3xl md:text-4xl text-white mb-2 flex items-center justify-center gap-4">
-                    <span class="text-cyber-green">//</span> CONTATO
-                </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-cyan mb-4 mx-auto"></div>
-                <p class="text-gray-400 text-sm sm:text-base mb-8">Vamos conversar sobre como posso ajudar sua empresa</p>
-            </div>
-
-            <div class="terminal max-w-xl mx-auto reveal">
-                <div class="terminal-header">
-                    <span class="terminal-btn bg-cyber-red"></span>
-                    <span class="terminal-btn bg-yellow-500"></span>
-                    <span class="terminal-btn bg-cyber-green"></span>
-                    <span class="text-gray-500 text-xs ml-2 truncate">contact.sh</span>
-                </div>
-                <div class="p-4 sm:p-6 space-y-4">
-                    <a href="mailto:natanaellima65@gmail.com" class="flex items-center gap-3 sm:gap-4 text-gray-300 hover:text-cyber-green transition-colors group p-2 rounded hover:bg-cyber-green/5">
-                        <ion-icon name="mail-outline" class="text-cyber-green text-xl flex-shrink-0"></ion-icon>
-                        <span class="text-sm truncate">natanaellima65@gmail.com</span>
-                    </a>
-                    <a href="https://wa.me/351910617161" target="_blank" class="flex items-center gap-3 sm:gap-4 text-gray-300 hover:text-cyber-cyan transition-colors group p-2 rounded hover:bg-cyber-cyan/5">
-                        <ion-icon name="logo-whatsapp" class="text-cyber-cyan text-xl flex-shrink-0"></ion-icon>
-                        <span class="text-sm">+351 910 617 161</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" class="flex items-center gap-3 sm:gap-4 text-gray-300 hover:text-cyber-purple transition-colors group p-2 rounded hover:bg-cyber-purple/5">
-                        <ion-icon name="logo-linkedin" class="text-cyber-purple text-xl flex-shrink-0"></ion-icon>
-                        <span class="text-sm truncate">linkedin.com/in/natanaellima10</span>
-                    </a>
-                    <a href="https://github.com/ademakin3051" target="_blank" class="flex items-center gap-3 sm:gap-4 text-gray-300 hover:text-white transition-colors group p-2 rounded hover:bg-white/5">
-                        <ion-icon name="logo-github" class="text-white text-xl flex-shrink-0"></ion-icon>
-                        <span class="text-sm truncate">github.com/ademakin3051</span>
+                <div class="expander reveal">
+                    <a href="projects.html" class="btn btn--primary">
+                        <ion-icon name="grid-outline" aria-hidden="true"></ion-icon> Ver Todos os Projetos
                     </a>
                 </div>
             </div>
+        </section>
 
-            <!-- Social Icons -->
-            <div class="flex items-center justify-center gap-4 sm:gap-6 mt-8 reveal">
-                <a href="https://github.com/ademakin3051" target="_blank" class="w-12 h-12 bg-cyber-gray border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:border-white transition-all hover:scale-110">
-                    <ion-icon name="logo-github" class="text-xl"></ion-icon>
-                </a>
-                <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" class="w-12 h-12 bg-cyber-gray border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan transition-all hover:scale-110">
-                    <ion-icon name="logo-linkedin" class="text-xl"></ion-icon>
-                </a>
-                <a href="https://wa.me/351910617161" target="_blank" class="w-12 h-12 bg-cyber-gray border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyber-green hover:border-cyber-green transition-all hover:scale-110">
-                    <ion-icon name="logo-whatsapp" class="text-xl"></ion-icon>
-                </a>
-                <a href="mailto:natanaellima65@gmail.com" class="w-12 h-12 bg-cyber-gray border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyber-red hover:border-cyber-red transition-all hover:scale-110">
-                    <ion-icon name="mail-outline" class="text-xl"></ion-icon>
-                </a>
+        <!-- Testimonials -->
+        <section id="testimonials" class="section" aria-labelledby="testimonials-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span class="idx">05</span> References</p>
+                    <h2 id="testimonials-title" class="section-title">Recomendações</h2>
+                </header>
+
+                <div class="grid grid-2">
+                    <figure class="panel quote reveal">
+                        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+                        <blockquote class="quote__text">"Profissional altamente qualificado e ágil, sempre dedicado a prestar suporte em TI. Contribuiu positivamente para o trabalho em equipe."</blockquote>
+                        <figcaption class="quote__author">
+                            <img src="./img/depoimento1.png" alt="Victor Bufalari" width="44" height="44" loading="lazy">
+                            <div><p class="quote__name">Victor Bufalari</p><p class="quote__role">Coordenador - Grupo Positivo</p></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="panel quote reveal" style="--d:80ms">
+                        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+                        <blockquote class="quote__text">"Natan é dedicado, inteligente e profissional. Possui muitas habilidades e grande capacidade de trabalhar em equipe."</blockquote>
+                        <figcaption class="quote__author">
+                            <img src="./img/depoimento2.png" alt="Elisângela Bassete" width="44" height="44" loading="lazy">
+                            <div><p class="quote__name">Elisângela Bassete</p><p class="quote__role">Diretora - Sete Ambiental</p></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="panel quote reveal">
+                        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+                        <blockquote class="quote__text">"Profissional de primeira. Habilidades incríveis, resolve situações desafiadoras e executa seu trabalho com maestria."</blockquote>
+                        <figcaption class="quote__author">
+                            <img src="./img/depoimento3.png" alt="Jaqueline Monteiro" width="44" height="44" loading="lazy">
+                            <div><p class="quote__name">Jaqueline Monteiro</p><p class="quote__role">Representante Comercial</p></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="panel quote reveal" style="--d:80ms">
+                        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+                        <blockquote class="quote__text">"Fortes habilidades técnicas e excelente visão em tecnologia. Destaco sua empatia e excelentes habilidades de comunicação."</blockquote>
+                        <figcaption class="quote__author">
+                            <img src="./img/depoimentos4.png" alt="Michael Douglas" width="44" height="44" loading="lazy">
+                            <div><p class="quote__name">Michael Douglas</p><p class="quote__role">Assistente de Produto</p></div>
+                        </figcaption>
+                    </figure>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Research log (blog preview) -->
+        <section id="blog" class="section section--alt" aria-labelledby="blog-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span class="idx">06</span> Research log</p>
+                    <h2 id="blog-title" class="section-title">Blog</h2>
+                    <p class="section-lead">Insights sobre Cybersecurity, Social Engineering e Proteção Digital.</p>
+                </header>
+
+                <div class="panel log reveal">
+                    <a class="log__row" href="https://sunrise-otter-ad6.notion.site/Japan-Uncovers-Chinese-Hacker-Behind-Extensive-Cyberattacks-1788e85494cf805ea7b1fefbeea08098" target="_blank" rel="noopener">
+                        <span class="log__date">11 Jan, 2025</span>
+                        <span class="log__title">Japan Uncovers Chinese Hacker Behind Extensive Cyberattacks</span>
+                        <span class="cat cat--news">Cyber News</span>
+                    </a>
+                    <a class="log__row" href="https://sunrise-otter-ad6.notion.site/Cuidado-Criminosos-est-o-Usando-Seus-Dados-para-Golpes-fb3d132105e44bdda56c3c06cd7e94cc" target="_blank" rel="noopener">
+                        <span class="log__date">23 Feb, 2024</span>
+                        <span class="log__title">Cuidado! Criminosos Estão Usando Seus Dados para Golpes</span>
+                        <span class="cat cat--breach">Data Breach</span>
+                    </a>
+                    <a class="log__row" href="https://sunrise-otter-ad6.notion.site/Explorando-o-Mundo-do-Crime-com-a-Sociedade-An-nima-S-A-33af64221fa24ba098093c9b0989f64a" target="_blank" rel="noopener">
+                        <span class="log__date">11 Oct, 2023</span>
+                        <span class="log__title">Explorando o Mundo do Crime Digital</span>
+                        <span class="cat cat--security">Security Research</span>
+                    </a>
+                    <a class="log__row" href="https://sunrise-otter-ad6.notion.site/O-Perigo-da-Engenharia-Social-Principais-Ataques-e-Como-se-Proteger-209272682c174545b7cbecba58704435" target="_blank" rel="noopener">
+                        <span class="log__date">21 Jun, 2023</span>
+                        <span class="log__title">O Perigo da Engenharia Social: Principais Ataques e Como se Proteger</span>
+                        <span class="cat cat--social">Social Engineering</span>
+                    </a>
+                </div>
+
+                <div class="expander reveal">
+                    <a href="blog.html" class="btn btn--ghost"><ion-icon name="newspaper-outline" aria-hidden="true"></ion-icon> Ir para o Blog</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section" aria-labelledby="contact-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span class="idx">07</span> Establish connection</p>
+                    <h2 id="contact-title" class="section-title">Contato</h2>
+                </header>
+
+                <div class="contact__grid">
+                    <div class="panel contact__intro corners scan reveal">
+                        <h3>Vamos conversar sobre como posso ajudar sua empresa</h3>
+                        <p>Email, WhatsApp, LinkedIn ou GitHub — escolha o canal que preferir.</p>
+                        <div class="contact__handshake" aria-hidden="true">
+                            <p><span class="t-ok">[ OK ]</span>handshake iniciado</p>
+                            <p><span class="t-ok">[ OK ]</span>canal seguro estabelecido</p>
+                            <p><span class="t-ok">[ &gt;&gt; ]</span>aguardando sua mensagem<span class="caret"></span></p>
+                        </div>
+                        <a href="mailto:natanaellima65@gmail.com" class="btn btn--primary">
+                            <ion-icon name="send-outline" aria-hidden="true"></ion-icon> Enviar mensagem
+                        </a>
+                    </div>
+
+                    <div class="channels">
+                        <a href="mailto:natanaellima65@gmail.com" class="panel panel--hover channel reveal">
+                            <span class="icon-box"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon></span>
+                            <span><span class="channel__label">Email</span><br><span class="channel__value">natanaellima65@gmail.com</span></span>
+                            <ion-icon name="arrow-forward-outline" class="channel__go" aria-hidden="true"></ion-icon>
+                        </a>
+                        <a href="https://wa.me/351910617161" target="_blank" rel="noopener" class="panel panel--hover channel reveal" style="--d:60ms">
+                            <span class="icon-box"><ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon></span>
+                            <span><span class="channel__label">WhatsApp</span><br><span class="channel__value">+351 910 617 161</span></span>
+                            <ion-icon name="arrow-forward-outline" class="channel__go" aria-hidden="true"></ion-icon>
+                        </a>
+                        <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" rel="noopener" class="panel panel--hover channel reveal" style="--d:120ms">
+                            <span class="icon-box icon-box--cyan"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon></span>
+                            <span><span class="channel__label">LinkedIn</span><br><span class="channel__value">linkedin.com/in/natanaellima10</span></span>
+                            <ion-icon name="arrow-forward-outline" class="channel__go" aria-hidden="true"></ion-icon>
+                        </a>
+                        <a href="https://github.com/ademakin3051" target="_blank" rel="noopener" class="panel panel--hover channel reveal" style="--d:180ms">
+                            <span class="icon-box icon-box--cyan"><ion-icon name="logo-github" aria-hidden="true"></ion-icon></span>
+                            <span><span class="channel__label">GitHub</span><br><span class="channel__value">github.com/ademakin3051</span></span>
+                            <ion-icon name="arrow-forward-outline" class="channel__go" aria-hidden="true"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-cyber-green/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-gray-500 text-sm">
-                    <span class="text-cyber-green">&lt;</span>2025<span class="text-cyber-green">/&gt;</span> Natanael Lima • Red Team Specialist
-                </p>
-                <p class="text-gray-600 text-xs">
-                    <span class="text-cyber-green">$</span> echo "Built with <span class="text-cyber-red">♥</span> and <span class="text-cyber-cyan">code</span>"
-                </p>
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div>
+                <p class="footer__copy"><span class="accent">&lt;</span>2025<span class="accent">/&gt;</span> Natanael Lima • Red Team Specialist</p>
+                <p class="footer__echo"><span class="accent">$</span> echo "Built with <span class="heart">♥</span> and <span class="accent-2">code</span>"</p>
+            </div>
+            <div class="footer__social">
+                <a href="https://github.com/ademakin3051" target="_blank" rel="noopener" class="icon-btn" aria-label="GitHub"><ion-icon name="logo-github" aria-hidden="true"></ion-icon></a>
+                <a href="https://www.linkedin.com/in/natanaellima10" target="_blank" rel="noopener" class="icon-btn" aria-label="LinkedIn"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon></a>
+                <a href="https://wa.me/351910617161" target="_blank" rel="noopener" class="icon-btn" aria-label="WhatsApp"><ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon></a>
+                <a href="mailto:natanaellima65@gmail.com" class="icon-btn" aria-label="Email"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon></a>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Mobile Menu
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-        document.querySelectorAll('#mobileMenu a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-        });
-
-        // Typing Effect
-        const typingText = document.getElementById('typingText');
-        const phrases = ['Hardware Support', 'Penetration Tester', 'Ethical Hacker', 'System Support', 'RPA Developer'];
-        let phraseIndex = 0, charIndex = 0, isDeleting = false;
-
-        function typeEffect() {
-            const currentPhrase = phrases[phraseIndex];
-            typingText.textContent = isDeleting 
-                ? currentPhrase.substring(0, --charIndex)
-                : currentPhrase.substring(0, ++charIndex);
-
-            let speed = isDeleting ? 50 : 100;
-            if (!isDeleting && charIndex === currentPhrase.length) { speed = 2000; isDeleting = true; }
-            else if (isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; speed = 500; }
-            setTimeout(typeEffect, speed);
-        }
-        typeEffect();
-
-        // Matrix Rain
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
-        const fontSize = 14;
-        let columns = canvas.width / fontSize;
-        let drops = Array(Math.floor(columns)).fill(1);
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00ff41';
-            ctx.font = fontSize + 'px JetBrains Mono';
-            for (let i = 0; i < drops.length; i++) {
-                ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 50);
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            columns = canvas.width / fontSize;
-            drops = Array(Math.floor(columns)).fill(1);
-        });
-
-        // Scroll Reveal
-        const revealElements = document.querySelectorAll('.reveal');
-        function reveal() {
-            revealElements.forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
-            });
-        }
-        window.addEventListener('scroll', reveal);
-        reveal();
-
-        // Active Nav
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY + 100;
-            sections.forEach(section => {
-                if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${section.id}`) link.classList.add('active');
-                    });
-                }
-            });
-        });
-
-        // Skill Bars Animation
-        const skillBars = document.querySelectorAll('.skill-bar-fill');
-        let animated = false;
-        function animateSkills() {
-            const skillsSection = document.getElementById('skills');
-            if (skillsSection.getBoundingClientRect().top < window.innerHeight - 100 && !animated) {
-                skillBars.forEach(bar => {
-                    const w = bar.style.width;
-                    bar.style.width = '0';
-                    setTimeout(() => bar.style.width = w, 100);
-                });
-                animated = true;
-            }
-        }
-        window.addEventListener('scroll', animateSkills);
-    </script>
+    <script src="./js/main.js" defer></script>
 </body>
 </html>
