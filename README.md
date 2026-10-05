@@ -18,10 +18,11 @@ O seletor **PT · EN · ES** no topo e no rodapé leva para a mesma página no o
 - `css/style.css`: todo o visual. Cores e fontes ficam nas variáveis do topo (`:root`).
 - `js/main.js`: menu mobile, terminal animado, link ativo, revelação ao rolar, carrossel, formulário de contato, troca de visualização dos projetos e filtro do blog.
 - `img/`: imagens em WebP (e os PNG originais). `my-avatar.png` é usada na prévia de compartilhamento (`og:image`).
-- `_build/`: gerador das páginas (o GitHub Pages não publica esta pasta).
+- `_build/`: gerador das páginas (só ferramentas; não é usado pelo site).
   - `i18n.py`: **todos os textos** nos três idiomas.
   - `gen.py`: monta as páginas a partir dos textos.
   - `sprite.html`: ícones SVG.
+- `.nojekyll`: faz o GitHub Pages publicar os arquivos como estão, sem a etapa Jekyll.
 
 ## Editar textos ou conteúdo
 
