@@ -152,6 +152,9 @@ button { background: none; border: 0; cursor: pointer; }
 .btn-primary:hover { background: #ffc040; box-shadow: 0 12px 36px -8px rgba(var(--amber-rgb), .9); }
 .btn-ghost { border-color: var(--amber-line); color: var(--text); background: rgba(var(--amber-rgb), .04); }
 .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+.btn-lg { min-height: 58px; padding: 0 32px; font-size: 1.06rem; }
+.btn-light { background: #fff; color: #000; box-shadow: 0 8px 28px -12px rgba(255, 255, 255, .5); }
+.btn-light:hover { background: var(--amber); box-shadow: 0 12px 36px -8px rgba(var(--amber-rgb), .8); }
 .btn-sm { min-height: 42px; padding: 0 20px; font-size: .92rem; }
 .btn-block { width: 100%; }
 
@@ -253,11 +256,8 @@ button { background: none; border: 0; cursor: pointer; }
 .hero h1 span { color: var(--amber); }
 .hero-lead { font-size: clamp(1.08rem, 1.7vw, 1.25rem); color: var(--muted); max-width: 46ch; }
 .hero-lead strong { color: var(--text); font-weight: 600; }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
-.hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; }
-.hero-meta a { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-weight: 500; font-size: .95rem; }
-.hero-meta a .i { color: var(--amber); }
-.hero-meta a:hover { color: var(--text); }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; max-width: 560px; }
+.hero-cta .btn-lg { flex: 1 1 220px; }
 
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; max-width: 520px; margin-top: 4px; }
 .stat { padding: 16px 18px; border-radius: var(--r); border: 1px solid rgba(var(--amber-rgb), .3); background: rgba(var(--amber-rgb), .04); }
@@ -271,20 +271,11 @@ button { background: none; border: 0; cursor: pointer; }
   animation: scan 7s linear infinite;
 }
 @keyframes scan { to { top: 110%; } }
-.console .term-body { min-height: 316px; }
-.whoami-card {
-  position: absolute; right: -18px; bottom: -28px; display: flex; align-items: center; gap: 12px;
-  padding: 10px 20px 10px 10px; border-radius: 999px;
-  background: #0b0b0b; border: 1.5px solid var(--amber-line); box-shadow: var(--glow);
-}
-.whoami-card img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; object-position: top; background: #1a1a1a; }
-.whoami-card b { display: block; font-size: .95rem; }
-.whoami-card small { display: block; font-size: .78rem; color: var(--amber); font-weight: 600; }
+.console .term-body { min-height: 250px; }
 
 @media (max-width: 960px) {
   .hero { min-height: auto; }
   .hero-grid { grid-template-columns: 1fr; }
-  .whoami-card { position: static; margin-top: 14px; width: max-content; max-width: 100%; }
 }
 
 /* ---------- Sobre ---------- */
@@ -317,8 +308,8 @@ button { background: none; border: 0; cursor: pointer; }
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr; }
   .id-card { position: relative; top: 0; grid-template-columns: 160px 1fr; gap: 4px 20px; align-content: center; }
-  .id-photo { grid-row: 1 / span 3; margin: 0; }
-  .id-card .status { align-self: end; margin: 0; }
+  .id-photo { grid-row: 1 / span 2; margin: 0; }
+  .id-card h3 { align-self: end; }
   .id-card p { align-self: start; }
 }
 @media (max-width: 560px) {
@@ -626,11 +617,12 @@ button { background: none; border: 0; cursor: pointer; }
   .hero { padding-top: calc(var(--nav-h) + 28px); }
   .hero h1 { font-size: clamp(3rem, 15vw, 3.6rem); }
   .hero-cta .btn { flex: 1 1 100%; }
+  .hero-cta .btn-lg { min-height: 54px; }
   .stats { gap: 8px; }
   .stat { padding: 12px; }
   .stat strong { font-size: 1.5rem; }
   .stat span { font-size: .74rem; }
-  .console .term-body { font-size: .8rem; padding: 16px; min-height: 290px; }
+  .console .term-body { font-size: .8rem; padding: 16px; min-height: 230px; }
   .head h2 { font-size: 2.1rem; }
   .brand-name { display: none; }
 }
