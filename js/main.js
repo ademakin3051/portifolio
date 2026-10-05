@@ -19,7 +19,7 @@
     var setMenu = function (open) {
       mobileMenu.classList.toggle('open', open);
       menuBtn.setAttribute('aria-expanded', String(open));
-      menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      menuBtn.setAttribute('aria-label', menuBtn.getAttribute(open ? 'data-label-close' : 'data-label-open') || '');
       menuBtn.querySelector('use').setAttribute('href', open ? '#i-close' : '#i-menu');
     };
     menuBtn.addEventListener('click', function () {
@@ -184,16 +184,16 @@
       var bad = [email, subject].filter(function (f) { return !f.value.trim() || (f.type === 'email' && !f.checkValidity()); });
       [email, subject].forEach(function (f) { f.setAttribute('aria-invalid', String(bad.indexOf(f) !== -1)); });
       if (bad.length) {
-        if (note) note.textContent = 'Preencha e-mail e assunto para enviar.';
+        if (note) note.textContent = form.getAttribute('data-msg-missing');
         bad[0].focus();
         return;
       }
       var name = form.elements.name.value.trim();
       var body = (form.elements.message.value.trim() || '') +
-        '\n\n— ' + (name || 'Contato pelo site') + ' (' + email.value.trim() + ')';
+        '\n\n— ' + (name || form.getAttribute('data-signature')) + ' (' + email.value.trim() + ')';
       window.location.href = 'mailto:natanaellima65@gmail.com?subject=' +
         encodeURIComponent(subject.value.trim()) + '&body=' + encodeURIComponent(body);
-      if (note) note.textContent = 'Abrindo seu app de e-mail…';
+      if (note) note.textContent = form.getAttribute('data-msg-opening');
     });
   }
 })();

@@ -4,23 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Projetos | Natanael Lima - Red Team Specialist</title>
-  <meta name="description" content="Projetos de Cybersecurity, RPA e Automação desenvolvidos por Natanael Lima">
+  <meta name="description" content="Projetos de Cybersecurity, RPA e Automação desenvolvidos por Natanael Lima.">
   <meta name="author" content="Natanael Lima">
   <meta name="keywords" content="cybersecurity, red team, penetration testing, ethical hacker, RPA, automation">
   <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://natanaellima.blog/projects.html">
+  <link rel="alternate" hreflang="pt-BR" href="https://natanaellima.blog/projects.html">
+  <link rel="alternate" hreflang="en" href="https://natanaellima.blog/en/projects.html">
+  <link rel="alternate" hreflang="es" href="https://natanaellima.blog/es/projects.html">
+  <link rel="alternate" hreflang="x-default" href="https://natanaellima.blog/projects.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Natanael Lima">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="es_ES">
   <meta property="og:title" content="Projetos | Natanael Lima - Red Team Specialist">
-  <meta property="og:description" content="Projetos de Cybersecurity, RPA e Automação desenvolvidos por Natanael Lima">
+  <meta property="og:description" content="Projetos de Cybersecurity, RPA e Automação desenvolvidos por Natanael Lima.">
   <meta property="og:url" content="https://natanaellima.blog/projects.html">
   <meta property="og:image" content="https://natanaellima.blog/img/my-avatar.png">
   <meta name="twitter:card" content="summary">
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -30,8 +37,11 @@
   <div class="wrap nav-inner">
     <a class="brand" href="index.html" aria-label="Natanael Lima — início"><span class="brand-tile">NL</span><span class="brand-name">Natanael Lima<small>Red Team Specialist</small></span></a>
     <nav class="nav-links" aria-label="Principal"><a href="index.html">Início</a><a href="index.html#about">Sobre</a><a href="index.html#skills">Skills</a><a href="index.html#experience">Experiência</a><a href="projects.html" class="active" aria-current="page">Projetos</a><a href="blog.html">Blog</a><a href="index.html#contact">Contato</a></nav>
-    <a class="btn btn-primary btn-sm btn-cta" href="https://wa.me/351910617161" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-whatsapp"></use></svg> Fale comigo</a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu"><svg class="i" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+    <div class="nav-side">
+      <div class="lang" role="group" aria-label="Idioma"><a href="projects.html" hreflang="pt-BR" lang="pt-BR" title="Português" aria-current="true">PT</a><a href="en/projects.html" hreflang="en" lang="en" title="English">EN</a><a href="es/projects.html" hreflang="es" lang="es" title="Español">ES</a></div>
+      <a class="btn btn-primary btn-sm btn-cta" href="https://wa.me/351910617161" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-whatsapp"></use></svg> Fale comigo</a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu" data-label-open="Abrir menu" data-label-close="Fechar menu"><svg class="i" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+    </div>
   </div>
 </header>
 <nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile">
@@ -53,71 +63,71 @@
     <div class="toolbar">
       <span class="count">3 projetos concluídos</span>
       <div class="view-toggle" role="group" aria-label="Visualização dos projetos">
-        <button type="button" data-view="full" aria-pressed="true"><svg class="i" aria-hidden="true"><use href="#i-layers"></use></svg> Case studies</button>
-        <button type="button" data-view="compact" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-code"></use></svg> Todos os Projetos</button>
+        <button type="button" data-view="full" aria-pressed="true"><svg class="i" aria-hidden="true"><use href="#i-layers"></use></svg> Estudos de caso</button>
+        <button type="button" data-view="compact" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-code"></use></svg> Todos os projetos</button>
       </div>
     </div>
     <div class="cases" id="cases">
       <article class="card case reveal" id="chatbot-glpi">
         <div class="case-media">
-          <img src="./img/projeto1.webp" alt="Chatbot GLPI" loading="lazy">
-          <span class="status">Completo</span>
+          <img src="img/projeto1.webp" alt="Chatbot GLPI" loading="lazy">
+          <span class="status">Concluído</span>
         </div>
         <div class="case-body">
-          <div class="case-id"><span>PROJECT / 001</span><b>RPA + AI</b></div>
+          <div class="case-id"><span>PROJECT / 001</span><b>RPA + IA</b></div>
           <h2>Chatbot GLPI</h2>
-          <p class="case-desc">Chatbot de suporte inteligente integrando <strong>N8N</strong>, <strong>GLPI</strong>, <strong>OpenAI GPT-4.1</strong> e <strong>WhatsApp API</strong>. Automatiza abertura e acompanhamento de chamados com resumos gerados por IA, oferecendo atendimento 24/7.</p>
-          <p class="case-summary">Chatbot de suporte inteligente com N8N, GLPI e OpenAI</p>
+          <p class="case-desc">Chatbot de suporte inteligente integrando <strong>N8N</strong>, <strong>GLPI</strong>, <strong>OpenAI GPT-4.1</strong> e <strong>WhatsApp API</strong>. Automatiza a abertura e o acompanhamento de chamados com resumos gerados por IA, oferecendo atendimento 24/7.</p>
+          <p class="case-summary">Chatbot de suporte inteligente com N8N, GLPI e OpenAI.</p>
           <dl class="ps">
             <div><dt>Problema</dt><dd>Abertura e acompanhamento de chamados de suporte.</dd></div>
             <div><dt>Solução</dt><dd>Chatbot no WhatsApp que automatiza os chamados no GLPI, com resumos gerados por IA e atendimento 24/7.</dd></div>
           </dl>
           <div class="tags"><span class="tag">N8N</span><span class="tag">GLPI</span><span class="tag">OpenAI</span><span class="tag">WhatsApp</span><span class="tag">Webhooks</span></div>
           <div class="case-actions">
-            <a class="btn btn-primary" href="https://github.com/ademakin3051/botglpi" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"></use></svg> Ver Código</a>
-            <a class="btn btn-ghost" href="https://youtu.be/EqQT7VZ-78E" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-play"></use></svg> Ver Demo</a>
+            <a class="btn btn-primary" href="https://github.com/ademakin3051/botglpi" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"></use></svg> Ver código</a>
+            <a class="btn btn-ghost" href="https://youtu.be/EqQT7VZ-78E" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-play"></use></svg> Ver demo</a>
           </div>
         </div>
       </article>
       <article class="card case reveal" id="digitador-automatico">
         <div class="case-media">
-          <img src="./img/projeto2.webp" alt="Digitador Automático" loading="lazy">
-          <span class="status">Completo</span>
+          <img src="img/projeto2.webp" alt="Digitador Automático" loading="lazy">
+          <span class="status">Concluído</span>
         </div>
         <div class="case-body">
           <div class="case-id"><span>PROJECT / 002</span><b>Automação</b></div>
           <h2>Digitador Automático</h2>
-          <p class="case-desc">Aplicação <strong>Python</strong> com interface Tkinter para automatização de digitação. Controla o teclado via <strong>pynput</strong>, permitindo ajustar velocidade e interromper a qualquer momento. Ideal para automação de tarefas repetitivas.</p>
-          <p class="case-summary">Aplicação Python para automatização de digitação</p>
+          <p class="case-desc">Aplicação <strong>Python</strong> com interface Tkinter para automatizar a digitação. Controla o teclado via <strong>pynput</strong>, permitindo ajustar a velocidade e interromper a qualquer momento. Ideal para automatizar tarefas repetitivas.</p>
+          <p class="case-summary">Aplicação Python para automatizar a digitação.</p>
           <dl class="ps">
             <div><dt>Problema</dt><dd>Tarefas repetitivas de digitação.</dd></div>
             <div><dt>Solução</dt><dd>Interface Tkinter que controla o teclado via pynput, com velocidade ajustável e interrupção a qualquer momento.</dd></div>
           </dl>
           <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">Pynput</span><span class="tag">GUI</span></div>
           <div class="case-actions">
-            <a class="btn btn-primary" href="https://github.com/ademakin3051/digitador-automatico" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"></use></svg> Ver Código</a>
-            <a class="btn btn-ghost" href="https://youtu.be/trLHH-mYcH4" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-play"></use></svg> Ver Demo</a>
+            <a class="btn btn-primary" href="https://github.com/ademakin3051/digitador-automatico" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"></use></svg> Ver código</a>
+            <a class="btn btn-ghost" href="https://youtu.be/trLHH-mYcH4" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-play"></use></svg> Ver demo</a>
           </div>
         </div>
       </article>
       <article class="card case reveal" id="script-googledorks">
         <div class="case-media">
-          <img src="./img/projeto3.webp" alt="Script GoogleDorks" loading="lazy">
-          <span class="status">Completo</span>
+          <img src="img/projeto3.webp" alt="Script GoogleDorks" loading="lazy">
+          <span class="status">Concluído</span>
         </div>
         <div class="case-body">
-          <div class="case-id"><span>PROJECT / 003</span><b>Recon RedTeam</b></div>
+          <div class="case-id"><span>PROJECT / 003</span><b>Recon Red Team</b></div>
           <h2>Script GoogleDorks</h2>
-          <p class="case-desc">Script automatiza <strong>Google Dorks</strong> via API para identificar superfícies expostas públicas.</p>
-          <p class="case-summary">Script automatiza Google Dorks via API para identificar superfícies expostas públicas.</p>
+          <p class="case-desc">Script que automatiza <strong>Google Dorks</strong> via API para identificar superfícies expostas publicamente.</p>
+          <p class="case-summary">Script que automatiza Google Dorks via API para identificar superfícies expostas publicamente.</p>
           <dl class="ps">
-            <div><dt>Problema</dt><dd>Identificar superfícies expostas públicas.</dd></div>
-            <div><dt>Solução</dt><dd>Script que automatiza as consultas Google Dorks via API.</dd></div>
+            <div><dt>Problema</dt><dd>Identificar superfícies expostas publicamente.</dd></div>
+            <div><dt>Solução</dt><dd>Script que automatiza as consultas de Google Dorks via API.</dd></div>
           </dl>
           <div class="tags"><span class="tag">Google Dorks</span><span class="tag">API</span><span class="tag">Recon</span></div>
           <div class="case-actions">
-            <a class="btn btn-primary" href="https://github.com/ademakin3051/ferramentagoogledorks" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"></use></svg> Ver Código</a>
-            <a class="btn btn-ghost" href="https://youtu.be/EfaL-Qc4lK4" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-play"></use></svg> Ver Demo</a>
+            <a class="btn btn-primary" href="https://github.com/ademakin3051/ferramentagoogledorks" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"></use></svg> Ver código</a>
+            <a class="btn btn-ghost" href="https://youtu.be/EfaL-Qc4lK4" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-play"></use></svg> Ver demo</a>
           </div>
         </div>
       </article>
@@ -132,21 +142,21 @@
     </header>
     <div class="card-grid">
       <article class="card hover road reveal">
-        <div class="road-top"><span class="ico-tile"><svg class="i" aria-hidden="true"><use href="#i-bug"></use></svg></span><span class="status is-dev">Em Dev</span></div>
+        <div class="road-top"><span class="ico-tile"><svg class="i" aria-hidden="true"><use href="#i-bug"></use></svg></span><span class="status is-dev">Em desenvolvimento</span></div>
         <h3>Analisador de hashes</h3>
-        <p>Script automatizado para identificação de hashes e descritografia</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Bash Script</span><span class="tag">Dicionarios</span></div>
+        <p>Script automatizado para identificação de hashes e descriptografia.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Bash Script</span><span class="tag">Dicionários</span></div>
       </article>
       <article class="card hover road reveal">
         <div class="road-top"><span class="ico-tile"><svg class="i" aria-hidden="true"><use href="#i-wifi"></use></svg></span><span class="status is-plan">Planejado</span></div>
         <h3>Network Monitor</h3>
-        <p>Dashboard em tempo real para monitoramento de tráfego e anomalias de rede com ajuda em tempo real de I.A</p>
+        <p>Dashboard em tempo real para monitorar o tráfego e as anomalias da rede, com apoio de IA.</p>
         <div class="tags"><span class="tag">Python</span><span class="tag">Scapy</span><span class="tag">Dashboard</span></div>
       </article>
       <article class="card hover road reveal">
         <div class="road-top"><span class="ico-tile"><svg class="i" aria-hidden="true"><use href="#i-fish"></use></svg></span><span class="status is-plan">Planejado</span></div>
         <h3>Phishing Detector</h3>
-        <p>Ferramenta de análise e detecção de sites de phishing com machine learning</p>
+        <p>Ferramenta de análise e detecção de sites de phishing com machine learning.</p>
         <div class="tags"><span class="tag">Python</span><span class="tag">ML</span><span class="tag">Browser Ext</span></div>
       </article>
     </div>
@@ -160,8 +170,8 @@
       <div class="term-body">
         <p><span class="prompt">$</span> cat project_stats.json</p>
         <div class="kv">
-          <div><strong>3</strong><span>Completos</span></div>
-          <div><strong>1</strong><span>Em Desenvolvimento</span></div>
+          <div><strong>3</strong><span>Concluídos</span></div>
+          <div><strong>1</strong><span>Em desenvolvimento</span></div>
           <div><strong>2</strong><span>Planejados</span></div>
           <div><strong>100%</strong><span>Open Source</span></div>
         </div>
@@ -171,7 +181,7 @@
     <div class="card gh-cta reveal">
       <span class="ico-tile"><svg class="i" aria-hidden="true"><use href="#i-github"></use></svg></span>
       <h3>Todos os projetos estão disponíveis no GitHub</h3>
-      <a class="btn btn-primary" href="https://github.com/ademakin3051" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"></use></svg> Ver Todos no GitHub</a>
+      <a class="btn btn-primary" href="https://github.com/ademakin3051" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"></use></svg> Ver todos no GitHub</a>
     </div>
   </div>
 </section>
@@ -182,6 +192,7 @@
       <div class="footer-about">
         <a class="brand" href="index.html" aria-label="Natanael Lima — início"><span class="brand-tile">NL</span></a>
         <p>Natanael Lima — Red Team Specialist. Cybersecurity, Red Team, Penetration Testing e Automação de Processos.</p>
+        <div class="lang lang-footer" role="group" aria-label="Idioma"><a href="projects.html" hreflang="pt-BR" lang="pt-BR" title="Português" aria-current="true">PT</a><a href="en/projects.html" hreflang="en" lang="en" title="English">EN</a><a href="es/projects.html" hreflang="es" lang="es" title="Español">ES</a></div>
       </div>
       <div>
         <h4>Navegação</h4>
@@ -207,6 +218,6 @@
   </div>
 </footer>
 <a class="wa-float" href="https://wa.me/351910617161" target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp"><svg class="i" aria-hidden="true"><use href="#i-whatsapp"></use></svg></a>
-<script src="./js/main.js" defer></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
