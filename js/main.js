@@ -139,4 +139,61 @@
       });
     });
   }
+
+  /* ---------- Carrossel de artigos (home) ---------- */
+  document.querySelectorAll('[data-carousel]').forEach(function (car) {
+    var track = car.querySelector('.track');
+    var prev = car.querySelector('.prev');
+    var next = car.querySelector('.next');
+    var dotsBox = car.querySelector('.car-dots');
+    var items = track.children;
+    var step = function () { return items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : track.clientWidth; };
+    var pages = function () { return Math.max(1, Math.ceil((track.scrollWidth - track.clientWidth) / step()) + 1); };
+    var render = function () {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= max;
+      if (!dotsBox) return;
+      var n = pages();
+      if (dotsBox.children.length !== n) {
+        dotsBox.innerHTML = '';
+        for (var k = 0; k < n; k++) {
+          var d = document.createElement('button');
+          d.type = 'button'; d.tabIndex = -1;
+          (function (k) { d.addEventListener('click', function () { track.scrollTo({ left: k * step() }); }); })(k);
+          dotsBox.appendChild(d);
+        }
+      }
+      var cur = Math.round(track.scrollLeft / step());
+      Array.prototype.forEach.call(dotsBox.children, function (d, k) { d.setAttribute('aria-current', String(k === cur)); });
+    };
+    if (prev) prev.addEventListener('click', function () { track.scrollBy({ left: -step() }); });
+    if (next) next.addEventListener('click', function () { track.scrollBy({ left: step() }); });
+    track.addEventListener('scroll', function () { window.requestAnimationFrame(render); }, { passive: true });
+    window.addEventListener('resize', render);
+    render();
+  });
+
+  /* ---------- Formulário de contato: abre o e-mail com a mensagem pronta ---------- */
+  var form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = form.elements.email, subject = form.elements.subject;
+      var note = document.getElementById('formNote');
+      var bad = [email, subject].filter(function (f) { return !f.value.trim() || (f.type === 'email' && !f.checkValidity()); });
+      [email, subject].forEach(function (f) { f.setAttribute('aria-invalid', String(bad.indexOf(f) !== -1)); });
+      if (bad.length) {
+        if (note) note.textContent = 'Preencha e-mail e assunto para enviar.';
+        bad[0].focus();
+        return;
+      }
+      var name = form.elements.name.value.trim();
+      var body = (form.elements.message.value.trim() || '') +
+        '\n\n— ' + (name || 'Contato pelo site') + ' (' + email.value.trim() + ')';
+      window.location.href = 'mailto:natanaellima65@gmail.com?subject=' +
+        encodeURIComponent(subject.value.trim()) + '&body=' + encodeURIComponent(body);
+      if (note) note.textContent = 'Abrindo seu app de e-mail…';
+    });
+  }
 })();
