@@ -1,19 +1,33 @@
 # Portfólio — Natanael Lima
 
-Site estático em HTML, CSS e JavaScript puros (sem frameworks). Publicado em `natanaellima.blog` (arquivo `CNAME`).
+Site estático em HTML, CSS e JavaScript puros (sem frameworks), publicado em `natanaellima.blog` (arquivo `CNAME`) pelo GitHub Pages.
+
+O site existe em três idiomas:
+
+| Idioma | Endereço |
+| --- | --- |
+| Português | `/` (`index.html`, `projects.html`, `blog.html`) |
+| English | `/en/` |
+| Español | `/es/` |
+
+O seletor **PT · EN · ES** no topo e no rodapé leva para a mesma página no outro idioma.
 
 ## Estrutura
 
-- `index.html`: home (hero, sobre, skills, experiência, projetos, recomendações e contato)
-- `projects.html`: case studies, próximos projetos e estatísticas
-- `blog.html`: artigo em destaque, arquivo com filtro por categoria e tópicos
-- `css/style.css`: todo o visual. As cores e fontes ficam nas variáveis do topo (`:root`)
-- `js/main.js`: menu mobile, terminal animado, link ativo, revelação ao rolar, troca de visualização dos projetos e filtro do blog
-- `img/`: imagens em WebP. `my-avatar.png` é usada na prévia de compartilhamento (og:image)
-- `favicon.svg`
+- `index.html`, `projects.html`, `blog.html` e as pastas `en/` e `es/`: páginas **geradas**. Não edite à mão.
+- `css/style.css`: todo o visual. Cores e fontes ficam nas variáveis do topo (`:root`).
+- `js/main.js`: menu mobile, terminal animado, link ativo, revelação ao rolar, carrossel, formulário de contato, troca de visualização dos projetos e filtro do blog.
+- `img/`: imagens em WebP (e os PNG originais). `my-avatar.png` é usada na prévia de compartilhamento (`og:image`).
+- `_build/`: gerador das páginas (o GitHub Pages não publica esta pasta).
+  - `i18n.py`: **todos os textos** nos três idiomas.
+  - `gen.py`: monta as páginas a partir dos textos.
+  - `sprite.html`: ícones SVG.
 
-## Editar conteúdo
+## Editar textos ou conteúdo
 
-- **Novo artigo:** copie um bloco `<a class="post" ...>` em `blog.html`. O valor de `data-cat` precisa ser igual ao de um botão de filtro.
-- **Novo projeto:** copie um bloco `<article class="case">` em `projects.html` e uma linha `<a class="proj-row">` em `index.html`.
-- **Ícones:** SVG embutidos no topo de cada página, usados com `<use href="#i-nome">`.
+1. Altere o texto em `_build/i18n.py` (ou a lista de projetos/artigos em `_build/gen.py`).
+2. Rode `python3 _build/gen.py` na raiz do repositório.
+3. Faça commit das páginas geradas.
+
+- **Novo artigo:** adicione um item em `POSTS` (`gen.py`) e o resumo traduzido em `POST_TX` (`i18n.py`).
+- **Novo projeto:** adicione um item em `PROJECTS` (`gen.py`) e os textos em `PROJ` (`i18n.py`).

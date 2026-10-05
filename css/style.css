@@ -106,6 +106,15 @@ button { background: none; border: 0; cursor: pointer; }
 .nav-links a:hover, .nav-links a.active { color: var(--amber); }
 
 .btn-cta { display: inline-flex; }
+.nav-side { display: flex; align-items: center; gap: 12px; }
+
+/* Seletor de idioma */
+.lang { display: inline-flex; padding: 3px; border: 1.5px solid var(--amber-line); border-radius: 999px; background: rgba(0, 0, 0, .4); }
+.lang a { min-width: 36px; padding: 5px 8px; border-radius: 999px; text-align: center; font-size: .78rem; font-weight: 700; letter-spacing: .04em; color: var(--muted); transition: color .2s, background .2s; }
+.lang a:hover { color: var(--text); }
+.lang a[aria-current="true"] { background: var(--amber); color: #000; }
+.lang-footer { margin-top: 18px; }
+.lang-note { color: var(--amber); font-weight: 600; }
 .menu-btn {
   display: none; width: 46px; height: 46px; place-items: center; border-radius: 12px;
   border: 1px solid var(--amber-line); color: var(--amber); font-size: 1.3rem;
@@ -130,10 +139,16 @@ button { background: none; border: 0; cursor: pointer; }
 .mobile-menu a .i { color: var(--dim); }
 .mobile-menu .btn { width: 100%; justify-content: center; margin-top: 16px; }
 
-@media (min-width: 1025px) { .mobile-menu { display: none; } }
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
+  .brand-name { display: none; }
+  .nav-links a { padding: 8px 9px; font-size: .94rem; }
+  .nav-inner { gap: 14px; }
+}
+@media (min-width: 1101px) { .mobile-menu { display: none; } }
+@media (max-width: 1100px) {
   :root { --nav-h: 76px; }
   .nav-links, .nav .btn-cta { display: none; }
+  .nav-side { gap: 8px; }
   .menu-btn { display: inline-grid; }
   .brand-tile { width: 44px; height: 44px; font-size: 1.1rem; }
 }
