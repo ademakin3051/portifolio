@@ -34,6 +34,12 @@ class Page:
     def asset(self, path):
         return self.up + path
 
+    def versioned(self, path):
+        """CSS/JS com ?v=<hash do conteúdo>, para o navegador não usar versão antiga em cache."""
+        import hashlib
+        digest = hashlib.sha1(open(os.path.join(OUT, path), 'rb').read()).hexdigest()[:8]
+        return f'{self.up}{path}?v={digest}'
+
     def url(self, lang=None, page=None):
         """URL absoluta de uma página (para canonical/hreflang)."""
         lang = lang or self.lang
@@ -108,7 +114,7 @@ def head(P, title_key, desc_key, extra=''):
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{P.asset('css/style.css')}">
+  <link rel="stylesheet" href="{P.versioned('css/style.css')}">
   <script>document.documentElement.classList.add('js')</script>{extra}
 </head>
 <body>
@@ -202,7 +208,7 @@ def footer(P):
   </div>
 </footer>
 <a class="wa-float" href="{WA}" {EXT} aria-label="{P.t('wa_float')}">{i('whatsapp')}</a>
-<script src="{P.asset('js/main.js')}" defer></script>
+<script src="{P.versioned('js/main.js')}" defer></script>
 </body>
 </html>
 '''
